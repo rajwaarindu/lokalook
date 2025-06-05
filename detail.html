@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detail Produk - Lokalook</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    /* Global CSS Custom Properties (Light Theme Default) */
+    :root {
+      --bg-color: #fafafa;
+      --text-color: #2c2c2c;
+      --card-bg-color: #ffffff;
+      --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      --header-bg-start: #2c3e50;
+      --header-bg-end: #34495e;
+      --header-bg-solid: #34445c; /* For mobile nav dropdown */
+      --header-text-color: #ecf0f1;
+      --accent-color: #1abc9c;
+      --accent-color-darker: #149174;
+      --secondary-text-color: #666;
+      --footer-bg-color: #eceff1;
+      --input-bg-color: #fff;
+      --input-border-color: #ddd;
+      --border-light: #eee;
+      --body-pattern-url: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="15" fill="%23e8e8e8" fill-opacity="0.2"/></svg>'); /* Subtle pattern */
+      --back-to-top-bg: #444;
+      --back-to-top-hover-bg: #000;
+      --star-color: #f39c12; /* Color for star ratings */
+      --toast-bg-success: #28a745;
+      --toast-text-color: white;
+
+      /* Shared Variables */
+      --header-padding: 1rem 2rem;
+      --logo-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --font-size-logo: 1.8rem;
+      --font-weight-logo: bold;
+      --font-weight-nav: 600;
+      --logo-gap: 0.75rem;
+      --nav-gap: 1.75rem;
+      --nav-link-padding: 0.4rem 0;
+      --transition-duration: 0.3s;
+      --transition-timing-function: ease;
+      --border-radius-main: 12px;
+      --border-radius-small: 8px;
+      --border-radius-micro: 3px;
+      --z-index-sticky-header: 1000;
+      --z-index-back-to-top: 990;
+      --z-index-toast: 1010;
+      --max-width-main: 1100px;
+    }
+
+    /* Dark Theme Variables */
+    body.dark-mode {
+      --bg-color: #1a1a1a;
+      --text-color: #e0e0e0;
+      --card-bg-color: #2c2c2c;
+      --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      --header-bg-start: #181f26;
+      --header-bg-end: #212933;
+      --header-bg-solid: #212933;
+      --header-text-color: #f0f0f0;
+      --secondary-text-color: #aaa;
+      --footer-bg-color: #222;
+      --input-bg-color: #333;
+      --input-border-color: #555;
+      --border-light: #444;
+      --body-pattern-url: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="15" fill="%23333" fill-opacity="0.2"/></svg>'); /* Darker pattern */
+      --back-to-top-bg: #666;
+      --back-to-top-hover-bg: #888;
+      --star-color: #ffc107;
+      --toast-bg-success: #218838;
+    }
+
+    /* Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      background-image: var(--body-pattern-url); /* Apply subtle pattern */
+      background-repeat: repeat;
+      color: var(--text-color);
+      transition: background-color var(--transition-duration) var(--transition-timing-function),
+                  color var(--transition-duration) var(--transition-timing-function);
+      line-height: 1.6;
+    }
+
+    /* --- Header --- */
+    header {
+      background: linear-gradient(90deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+      color: var(--header-text-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--header-padding);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-index-sticky-header);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      backdrop-filter: saturate(180%) blur(10px);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+    }
+
+    .logo {
+      font-size: var(--font-size-logo);
+      font-weight: var(--font-weight-logo);
+      display: flex;
+      align-items: center;
+      gap: var(--logo-gap);
+      cursor: pointer;
+      text-shadow: var(--logo-text-shadow);
+      color: var(--header-text-color);
+      text-decoration: none;
+    }
+    .logo i {
+      color: var(--accent-color); /* Icon color accent */
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: var(--nav-gap);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--header-text-color);
+      font-weight: var(--font-weight-nav);
+      padding: var(--nav-link-padding);
+      position: relative;
+      transition: color var(--transition-duration) var(--transition-timing-function),
+                  transform var(--transition-duration) var(--transition-timing-function);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2.5px; /* Slightly thicker underline */
+      bottom: -2px; /* Position slightly below text */
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width var(--transition-duration) var(--transition-timing-function);
+      border-radius: var(--border-radius-micro);
+    }
+
+    nav a:hover,
+    nav a.active, /* Add .active class via JS for current page */
+    nav a:focus-visible { /* Modern focus indicator */
+      color: var(--accent-color);
+      transform: translateY(-2px); /* Subtle lift effect */
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a.active::after,
+    nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 1rem; /* Gap between cart and theme toggle */
+    }
+
+    .cart-link {
+      position: relative;
+      color: var(--header-text-color); /* Ensure cart icon is visible */
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .cart-link i {
+      font-size: 1.3rem;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: var(--accent-color);
+      color: white;
+      border-radius: 50%;
+      padding: 0.1em 0.4em;
+      font-size: 0.7rem;
+      font-weight: bold;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px; /* Ensure circular shape for single digit */
+      height: 18px;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--header-text-color);
+      font-size: 1.3rem; /* Adjust size as needed */
+      cursor: pointer;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      transition: color var(--transition-duration);
+    }
+    .theme-toggle:hover, .theme-toggle:focus-visible {
+      color: var(--accent-color);
+      outline: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem; /* Increased size */
+      color: var(--header-text-color);
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      header {
+        padding: 0.8rem 1rem; /* Adjusted padding for mobile */
+      }
+      nav {
+        display: none; /* Initial state controlled by JS */
+        flex-direction: column;
+        align-items: flex-start; /* Align items to start for vertical menu */
+        background: var(--header-bg-solid);
+        position: absolute;
+        top: 100%; /* Position below header */
+        right: 0;
+        padding: 1rem;
+        width: 220px; /* Slightly wider */
+        box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+        border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity var(--transition-duration) var(--transition-timing-function),
+                    visibility var(--transition-duration) var(--transition-timing-function),
+                    transform var(--transition-duration) var(--transition-timing-function);
+      }
+
+      nav.show {
+        display: flex; /* Set by JS */
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      nav a {
+        width: 100%; /* Make links take full width */
+        padding: 0.75rem 0.5rem; /* Adjust padding for vertical items */
+      }
+      nav a::after {
+        bottom: 0.25rem; /* Adjust underline for vertical links */
+      }
+      .nav-tools {
+        width: 100%; /* Make tools container full width */
+        justify-content: space-between; /* Space out cart and theme toggle */
+        padding: 0.5rem 0.5rem 0; /* Add some padding */
+        border-top: 1px solid var(--border-light); /* Separator for tools */
+        margin-top: 0.5rem; /* Space from menu items */
+      }
+      .theme-toggle {
+        font-size: 1.5rem; /* Adjust toggle size for mobile nav */
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* --- Main Content Area --- */
+    main {
+      max-width: var(--max-width-main);
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background-color: var(--card-bg-color); /* Use card background for the main content area */
+      border-radius: var(--border-radius-main);
+      box-shadow: var(--card-shadow);
+      padding: 2rem; /* Added padding for content inside the main card */
+      transition: background-color var(--transition-duration) var(--transition-timing-function),
+                  box-shadow var(--transition-duration) var(--transition-timing-function);
+    }
+    
+    .detail-section {
+      display: flex;
+      flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+      gap: 2rem; /* Space between image and details */
+      justify-content: center; /* Center content horizontally */
+    }
+
+    .product-image-gallery {
+      flex: 1 1 45%; /* Allows wrapper to grow/shrink, minimum 45% width */
+      min-width: 300px; /* Minimum width for image on smaller screens */
+      text-align: center;
+      position: relative; /* For loading spinner */
+      border-radius: var(--border-radius-main);
+      overflow: hidden; /* For zoom effect */
+    }
+
+    .main-product-image {
+      width: 100%;
+      height: 350px; /* Fixed height for consistency */
+      object-fit: cover;
+      border-radius: var(--border-radius-main);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), /* Smoother transition */
+                  box-shadow var(--transition-duration) var(--transition-timing-function);
+      display: block; /* Remove extra space below image */
+    }
+    .main-product-image:hover {
+      transform: scale(1.05); /* More pronounced zoom on hover */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .thumbnail-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--border-radius-small);
+      border: 2px solid var(--border-light);
+      cursor: pointer;
+      transition: border-color var(--transition-duration), transform 0.2s ease-out;
+    }
+    .thumbnail:hover, .thumbnail.active {
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    .product-details {
+      flex: 1 1 50%; /* Allows details to grow/shrink, minimum 50% width */
+      min-width: 300px; /* Minimum width for details on smaller screens */
+    }
+
+    .product-details h1 {
+      font-size: 2.2rem;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-badge {
+      font-size: 1.6rem; /* Larger price */
+      font-weight: bold;
+      color: var(--accent-color-darker);
+      margin-bottom: 1.5rem;
+      display: inline-block; /* Allows margins to work */
+      padding: 0.4rem 1rem;
+      background-color: var(--accent-color);
+      color: white;
+      border-radius: var(--border-radius-small);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Subtle shadow */
+    }
+    
+    .product-description {
+      font-size: 1.1rem;
+      color: var(--secondary-text-color);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .quantity-selector label {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--input-border-color);
+      border-radius: var(--border-radius-small);
+      overflow: hidden;
+      background-color: var(--input-bg-color);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .quantity-control button {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      color: var(--accent-color-darker);
+      transition: background-color var(--transition-duration);
+    }
+    .quantity-control button:hover {
+      background-color: rgba(26, 188, 156, 0.1);
+    }
+    .quantity-control input[type="number"] {
+      width: 60px;
+      text-align: center;
+      border: none;
+      background: transparent;
+      color: var(--text-color);
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      -moz-appearance: textfield; /* Firefox */
+      outline: none;
+    }
+    .quantity-control input::-webkit-outer-spin-button,
+    .quantity-control input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .product-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      border: none;
+      color: white;
+      padding: 0.85rem 1.8rem;
+      border-radius: var(--border-radius-small);
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background-color var(--transition-duration), transform 0.2s ease-out, box-shadow var(--transition-duration);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: fit-content;
+      text-decoration: none; /* For anchor tags acting as buttons */
+    }
+
+    .btn-add-to-cart {
+      background-color: var(--accent-color);
+      box-shadow: 0 4px 10px rgba(26, 188, 156, 0.3);
+    }
+    .btn-add-to-cart:hover, .btn-add-to-cart:focus-visible {
+      background-color: var(--accent-color-darker);
+      transform: translateY(-3px); /* Lift effect on hover */
+      outline: none;
+      box-shadow: 0 6px 15px rgba(26, 188, 156, 0.4);
+    }
+    .btn-add-to-cart.added-to-cart {
+      animation: pop 0.3s ease-out forwards;
+    }
+
+    .btn-buy-now {
+      background-color: #3498db; /* A blue color for buy now */
+      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    }
+    .btn-buy-now:hover, .btn-buy-now:focus-visible {
+      background-color: #2980b9;
+      transform: translateY(-3px);
+      outline: none;
+      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    .btn-back-to-products {
+      background-color: var(--secondary-text-color);
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 1.5rem; /* Space from action buttons */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .btn-back-to-products:hover {
+      background-color: #555; /* Slightly darker secondary */
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    .product-not-found {
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.5rem;
+      color: var(--secondary-text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .product-not-found .btn-back-to-products {
+        margin-top: 0; /* Adjust margin for direct use */
+    }
+
+    /* --- Social Share --- */
+    .social-share {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .social-share h3 {
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      font-size: 1.3rem;
+    }
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .share-buttons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: var(--border-radius-small);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity var(--transition-duration), transform 0.2s ease-out;
+    }
+    .share-buttons a:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+    .share-buttons .facebook { background-color: #3b5998; }
+    .share-buttons .twitter { background-color: #00acee; }
+    .share-buttons .whatsapp { background-color: #25d366; }
+
+    /* --- Reviews Section --- */
+    .product-reviews {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .product-reviews h2 {
+      font-size: 1.8rem;
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+    }
+    .review-item {
+      background-color: var(--bg-color); /* Lighter background for reviews */
+      border: 1px solid var(--border-light);
+      border-radius: var(--border-radius-small);
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: background-color var(--transition-duration), border-color var(--transition-duration), box-shadow var(--transition-duration);
+    }
+    .review-item h4 {
+      margin: 0 0 0.5rem;
+      color: var(--text-color);
+    }
+    .review-item .rating {
+      color: var(--star-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .review-item p {
+      color: var(--secondary-text-color);
+      margin: 0;
+    }
+
+    /* --- Related Products Section --- */
+    .related-products {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .related-products h2 {
+      font-size: 1.8rem;
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+    }
+    .related-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .related-product-card {
+      background-color: var(--card-bg-color);
+      border-radius: var(--border-radius-small);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s ease-out, box-shadow var(--transition-duration);
+      text-decoration: none;
+      color: var(--text-color);
+    }
+    .related-product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .related-product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .related-product-card-content {
+      padding: 1rem;
+    }
+    .related-product-card h3 {
+      font-size: 1.1rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+    .related-product-card .price {
+      font-weight: bold;
+      color: var(--accent-color-darker);
+      font-size: 1rem;
+    }
+
+
+    /* --- Loading Spinner & Skeletons --- */
+    .loading-spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: var(--accent-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: none; /* Hidden by default */
+    }
+    .product-image-gallery.loading .loading-spinner {
+      display: block;
+    }
+    .product-image-gallery.loading .main-product-image,
+    .product-image-gallery.loading .thumbnail-container {
+        opacity: 0.3; /* Dim image while loading */
+    }
+
+    .skeleton-loading {
+      animation: pulse 1.5s infinite ease-in-out;
+      background-color: var(--border-light);
+      border-radius: var(--border-radius-small);
+    }
+    body.dark-mode .skeleton-loading {
+      background-color: #333;
+    }
+
+    .skeleton-title {
+      height: 30px;
+      width: 70%;
+      margin-bottom: 1rem;
+    }
+    .skeleton-price {
+      height: 25px;
+      width: 40%;
+      margin-bottom: 1.5rem;
+    }
+    .skeleton-description {
+      height: 20px;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    .skeleton-description:last-of-type {
+      width: 80%;
+      margin-bottom: 2rem;
+    }
+    .skeleton-quantity, .skeleton-buttons {
+      height: 45px;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .skeleton-image {
+      height: 350px;
+      width: 100%;
+    }
+    .skeleton-thumbnails {
+        height: 80px;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .skeleton-share, .skeleton-reviews-title, .skeleton-related-title {
+        height: 25px;
+        width: 60%;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+    }
+    .skeleton-review-item {
+        height: 100px;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .skeleton-related-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+    .skeleton-related-card {
+        height: 250px;
+        width: 100%;
+        border-radius: var(--border-radius-small);
+    }
+
+
+    /* --- Back to Top Button --- */
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--back-to-top-bg);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity var(--transition-duration), visibility var(--transition-duration), transform var(--transition-duration), background-color var(--transition-duration);
+        z-index: var(--z-index-back-to-top);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .back-to-top:hover {
+        background-color: var(--back-to-top-hover-bg);
+        transform: translateY(-2px);
+    }
+
+    /* --- Toast Notification --- */
+    .toast-notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--toast-bg-success);
+      color: var(--toast-text-color);
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius-small);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0.4s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      z-index: var(--z-index-toast);
+    }
+    .toast-notification.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-10px); /* Slightly lift up */
+    }
+    .toast-notification i {
+      font-size: 1.5rem;
+    }
+
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: var(--footer-bg-color);
+      color: var(--secondary-text-color);
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      transition: background-color var(--transition-duration), color var(--transition-duration);
+    }
+
+    /* --- Animations --- */
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes pop {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive Adjustments for Main Content */
+    @media (max-width: 768px) {
+      .detail-section {
+        flex-direction: column;
+        align-items: center;
+      }
+      .product-image-gallery, .product-details {
+        flex: 1 1 100%; /* Take full width on small screens */
+        min-width: unset; /* Remove min-width constraint */
+      }
+      main {
+        padding: 1.5rem; /* Reduce padding on mobile */
+        margin: 1rem auto;
+      }
+      .product-details h1 {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+      .price-badge {
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .quantity-selector {
+        justify-content: center;
+      }
+      .product-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn-back-to-products {
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+      .share-buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#beranda" class="logo" aria-label="Lokalook Homepage">
+      <img src="assets/lokalook-logo.png" alt="" style="height: 100px;" />
+    </a>  
+    <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
+    <nav id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="produk.html">Produk</a>
+      <div class="nav-tools">
+        <a href="keranjang.html" class="cart-link" aria-label="Keranjang Belanja">
+          <i class="bi bi-cart"></i> Keranjang
+          <span id="cart-count" class="cart-count" style="display: none;">0</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+          <i class="bi bi-moon-stars-fill"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="detail-main">
+    <div class="skeleton-loading-container">
+      <div class="detail-section">
+        <div class="product-image-gallery">
+          <div class="skeleton-image skeleton-loading"></div>
+          <div class="skeleton-thumbnails skeleton-loading"></div>
+        </div>
+        <div class="product-details">
+          <div class="skeleton-title skeleton-loading"></div>
+          <div class="skeleton-price skeleton-loading"></div>
+          <div class="skeleton-description skeleton-loading"></div>
+          <div class="skeleton-description skeleton-loading"></div>
+          <div class="skeleton-quantity skeleton-loading"></div>
+          <div class="skeleton-buttons skeleton-loading"></div>
+          <div class="skeleton-share skeleton-loading"></div>
+        </div>
+      </div>
+      <div class="skeleton-reviews-title skeleton-loading"></div>
+      <div class="skeleton-review-item skeleton-loading"></div>
+      <div class="skeleton-review-item skeleton-loading"></div>
+      <div class="skeleton-related-title skeleton-loading"></div>
+      <div class="skeleton-related-grid">
+        <div class="skeleton-related-card skeleton-loading"></div>
+        <div class="skeleton-related-card skeleton-loading"></div>
+        <div class="skeleton-related-card skeleton-loading"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="current-year"></span> Lokalook. Hak cipta dilindungi.
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <div id="toast-notification" class="toast-notification" role="status" aria-live="polite">
+    <i class="bi bi-check-circle-fill"></i>
+    <span id="toast-message"></span>
+  </div>
+
+  <script>
+    // Define produkData globally for consistency
+    const produkData = [
+      { 
+        id: 'P001', 
+        nama: 'Baju Wanita', 
+        harga: 120000, 
+        gambar: [
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJoO_Q3E6PQbeVP-QifekzowpUBQGKtq5vSMyhTSh9dhH2Yph3NQoqmPbeTT_cjmzExUg&usqp=CAU',
+          'https://cdn.kibrispdr.org/data/277/gambar-baju-wanita-13.webp',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqlMVz2yfwyXDpAa2DiNr3GQdZPdbOUZTXnJd3BuM3UkGSqDfUg0pvY7xiY3Qlg7njY4w&usqp=CAU'
+        ], 
+        deskripsi: 'Kaos dengan bahan premium, cocok untuk segala suasana. Tersedia berbagai ukuran dan warna yang menarik. Kualitas sablon awet dan tidak mudah luntur.',
+        reviews: [
+          { name: 'Andi', rating: 5, comment: 'Kaosnya bagus banget, bahannya adem. Rekomendasi!' },
+          { name: 'Siti', rating: 4, comment: 'Cukup puas dengan kualitasnya, pengiriman cepat.' }
+        ]
+      },
+      { 
+        id: 'P002', 
+        nama: 'Kemeja Batik Wanita', 
+        harga: 125000, 
+        gambar: [
+          'https://i0.wp.com/rumahbatikbedjo.com/wp-content/uploads/2024/09/Screenshot-2024-09-21-202549.png?fit=626%2C507&ssl=1',
+          'https://cdn1-production-images-kly.akamaized.net/cSSV3YBlhNaIQ7le94fGpeUxYyM=/800x800/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/5002213/original/079797000_1731387235-hadinata_batik_hadinata_batik_wanita_blouse_nirmala_naufal_full19_lgvctqyl.jpg',
+          'https://cdn1-production-images-kly.akamaized.net/Yy7PeJEYzVVBNQYCdawQndcYwM0=/500x500/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/5184952/original/034407900_1744353483-1c9747d99ebbbead42a182bd975fc130.jpg'
+        ], 
+        deskripsi: 'Kemeja motif etnik dengan sentuhan modern, memadukan tradisi dan gaya kontemporer. Nyaman dipakai untuk acara formal maupun kasual, terbuat dari bahan katun berkualitas tinggi.',
+        reviews: [
+          { name: 'Budi', rating: 5, comment: 'Desainnya unik dan modern. Sangat suka!' },
+          { name: 'Dewi', rating: 4, comment: 'Kualitas bahan bagus, tapi pengiriman agak lambat.' }
+        ]
+      },
+      { 
+        id: 'P003', 
+        nama: 'Hoodie Nyaman Banget', 
+        harga: 145000, 
+        gambar: [
+          'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/6/1/2810e5bb-8466-4d4b-8e4f-200d20a42762.jpg',
+          'https://images.tokopedia.net/img/cache/700/VqbcmM/2021/1/16/f0540536-6713-407c-a4bc-5bc749a51a92.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQskthRjKUUZ9kP9o9NsoItswRi4fPAQ4JI-z2cBaJtFxUrNrRhC25xeAC680PQZilTc4E&usqp=CAU'
+        ], 
+        deskripsi: 'Hoodie hangat dan stylish untuk cuaca dingin. Desain simpel dengan kualitas bahan fleece premium yang lembut di kulit. Dilengkapi saku kanguru dan tudung yang nyaman.',
+        reviews: [
+          { name: 'Citra', rating: 5, comment: 'Hoodienya nyaman banget, sesuai namanya! Hangat dan stylish.' }
+        ]
+      },
+      { 
+        id: 'P004', 
+        nama: 'Celana Chino Kasual', 
+        harga: 110000, 
+        gambar: [
+          'https://images.unsplash.com/photo-1541099645168-9844b20a108a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1549298285-801267868019?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        ], 
+        deskripsi: 'Celana chino kasual yang cocok untuk gaya sehari-hari. Terbuat dari bahan twill stretch yang fleksibel dan nyaman dipakai. Tersedia dalam berbagai pilihan warna.',
+        reviews: [
+          { name: 'Fajar', rating: 4, comment: 'Celananya pas di badan, tapi warnanya sedikit berbeda dari gambar.' }
+        ]
+      },
+      { 
+        id: 'A001', 
+        nama: 'Gelang Tali Etnik', 
+        harga: 35000, 
+        gambar: [
+          'https://images.unsplash.com/photo-1549298285-801267868019?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1588636734139-49767856b3e7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        ], 
+        deskripsi: 'Gelang tangan handmade dengan desain etnik unik. Terbuat dari tali berkualitas dan manik-manik khas nusantara, cocok untuk melengkapi penampilan Anda.',
+        reviews: []
+      },
+      { 
+        id: 'A002', 
+        nama: 'Topi Distro Lokal', 
+        harga: 60000, 
+        gambar: [
+          'https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1620799140326-78e762c4c442?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        ], 
+        deskripsi: 'Topi baseball dengan desain distro lokal yang keren dan kekinian. Bahan nyaman dan jahitan rapi, ideal untuk melengkapi gaya santai Anda.',
+        reviews: [
+          { name: 'Gilang', rating: 5, comment: 'Topinya keren parah, cocok buat nongkrong!' }
+        ]
+      },
+      { 
+        id: 'K001', 
+        nama: 'Kerajinan Tangan Anyaman', 
+        harga: 80000, 
+        gambar: [
+          'https://images.unsplash.com/photo-1600854407005-728b14e3b7b3?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1582234057997-c2901a5592e3?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        ], 
+        deskripsi: 'Produk kerajinan tangan berupa anyaman dari bahan alami. Cocok sebagai dekorasi rumah atau hadiah spesial. Dibuat dengan detail dan keahlian tangan pengrajin lokal.',
+        reviews: []
+      },
+      { 
+        id: 'K002', 
+        nama: 'Pajangan Meja Kayu', 
+        harga: 95000, 
+        gambar: [
+          'https://images.unsplash.com/photo-1596752003842-bc03a985a110?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1593309990888-038c11c5d09f?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        ], 
+        deskripsi: 'Pajangan meja minimalis dari kayu jati Belanda. Desain elegan dan modern, cocok untuk memperindah ruang kerja atau ruang tamu Anda.',
+        reviews: [
+          { name: 'Hana', rating: 5, comment: 'Pajangannya bagus, kualitas kayu juga oke.' }
+        ]
+      },
+    ];
+
+    const detailMainEl = document.getElementById('detail-main');
+    const cartCountEl = document.getElementById('cart-count');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const currentYearEl = document.getElementById('current-year');
+    const backToTopBtn = document.getElementById('back-to-top');
+    const toastNotification = document.getElementById('toast-notification');
+    const toastMessage = document.getElementById('toast-message');
+
+    /**
+     * Shows a toast notification with a given message.
+     * @param {string} message - The message to display in the toast.
+     */
+    function showToast(message) {
+        toastMessage.textContent = message;
+        toastNotification.classList.add('show');
+        setTimeout(() => {
+            toastNotification.classList.remove('show');
+        }, 3000); // Hide after 3 seconds
+    }
+
+    /**
+     * Generates star icons based on a given rating.
+     * @param {number} rating - The star rating (e.g., 4.5).
+     * @returns {string} HTML string of star icons.
+     */
+    function generateStarRating(rating) {
+      let stars = '';
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 !== 0;
+      const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+      for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="bi bi-star-fill"></i>';
+      }
+      if (halfStar) {
+        stars += '<i class="bi bi-star-half"></i>';
+      }
+      for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="bi bi-star"></i>';
+      }
+      return stars;
+    }
+
+    /**
+     * Renders the product detail section based on the URL parameter.
+     * Includes a loading spinner while the image is loading.
+     */
+    async function renderProductDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('id');
+      const produkDetail = produkData.find(p => p.id === productId);
+
+      if (produkDetail) {
+        document.title = `${produkDetail.nama} - Lokalook`; // Update page title
+
+        // Simulate network delay for loading effect
+        detailMainEl.innerHTML = `
+          <div class="skeleton-loading-container">
+            <div class="detail-section">
+              <div class="product-image-gallery">
+                <div class="skeleton-image skeleton-loading"></div>
+                <div class="skeleton-thumbnails skeleton-loading"></div>
+              </div>
+              <div class="product-details">
+                <div class="skeleton-title skeleton-loading"></div>
+                <div class="skeleton-price skeleton-loading"></div>
+                <div class="skeleton-description skeleton-loading"></div>
+                <div class="skeleton-description skeleton-loading"></div>
+                <div class="skeleton-quantity skeleton-loading"></div>
+                <div class="skeleton-buttons skeleton-loading"></div>
+                <div class="skeleton-share skeleton-loading"></div>
+              </div>
+            </div>
+            <div class="skeleton-reviews-title skeleton-loading"></div>
+            <div class="skeleton-review-item skeleton-loading"></div>
+            <div class="skeleton-review-item skeleton-loading"></div>
+            <div class="skeleton-related-title skeleton-loading"></div>
+            <div class="skeleton-related-grid">
+              <div class="skeleton-related-card skeleton-loading"></div>
+              <div class="skeleton-related-card skeleton-loading"></div>
+              <div class="skeleton-related-card skeleton-loading"></div>
+            </div>
+          </div>
+        `;
+        
+        await new Promise(resolve => setTimeout(resolve, 500)); // Simulate loading time
+
+        const mainImageUrl = Array.isArray(produkDetail.gambar) ? produkDetail.gambar[0] : produkDetail.gambar;
+        const thumbnailsHtml = Array.isArray(produkDetail.gambar) 
+          ? produkDetail.gambar.map((img, index) => `<img src="${img}" alt="${produkDetail.nama} thumbnail ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage(this)" data-src="${img}">`).join('')
+          : '';
+
+        const reviewsHtml = produkDetail.reviews.length > 0 ?
+          produkDetail.reviews.map(review => `
+            <div class="review-item">
+              <h4>${review.name}</h4>
+              <div class="rating">${generateStarRating(review.rating)}</div>
+              <p>${review.comment}</p>
+            </div>
+          `).join('') : '<p>Belum ada ulasan untuk produk ini.</p>';
+
+        const relatedProducts = produkData
+          .filter(p => p.id !== productId) // Exclude current product
+          .sort(() => 0.5 - Math.random()) // Shuffle
+          .slice(0, 3); // Take up to 3 related products
+
+        const relatedProductsHtml = relatedProducts.length > 0 ?
+          relatedProducts.map(p => `
+            <a href="detail_produk.html?id=${p.id}" class="related-product-card">
+              <img src="${Array.isArray(p.gambar) ? p.gambar[0] : p.gambar}" alt="${p.nama}">
+              <div class="related-product-card-content">
+                <h3>${p.nama}</h3>
+                <span class="price">Rp ${p.harga.toLocaleString('id-ID')}</span>
+              </div>
+            </a>
+          `).join('') : '<p>Tidak ada produk terkait.</p>';
+
+        detailMainEl.innerHTML = `
+          <div class="detail-section">
+            <div class="product-image-gallery loading">
+              <div class="loading-spinner"></div>
+              <img src="${mainImageUrl}" alt="${produkDetail.nama}" class="main-product-image" />
+              <div class="thumbnail-container">
+                ${thumbnailsHtml}
+              </div>
+            </div>
+            <div class="product-details">
+              <h1>${produkDetail.nama}</h1>
+              <span class="price-badge">Rp ${produkDetail.harga.toLocaleString('id-ID')}</span>
+              <p class="product-description">${produkDetail.deskripsi}</p>
+              
+              <div class="quantity-selector">
+                <label for="product-quantity">Jumlah:</label>
+                <div class="quantity-control">
+                  <button onclick="changeQuantity(-1)" aria-label="Kurangi jumlah"><i class="bi bi-dash-circle"></i></button>
+                  <input type="number" id="product-quantity" value="1" min="1" max="99" onchange="validateQuantity()" aria-label="Jumlah produk">
+                  <button onclick="changeQuantity(1)" aria-label="Tambah jumlah"><i class="bi bi-plus-circle"></i></button>
+                </div>
+              </div>
+
+              <div class="product-actions">
+                <button class="btn btn-add-to-cart" onclick="tambahKeKeranjang('${produkDetail.id}')" aria-label="Tambahkan ${produkDetail.nama} ke keranjang">
+                  <i class="bi bi-cart-plus-fill"></i> Tambah ke Keranjang
+                </button>
+                <button class="btn btn-buy-now" onclick="beliSekarang('${produkDetail.id}')" aria-label="Beli ${produkDetail.nama} sekarang">
+                  <i class="bi bi-lightning-fill"></i> Beli Sekarang
+                </button>
+              </div>
+
+              <div class="social-share">
+                <h3>Bagikan Produk Ini:</h3>
+                <div class="share-buttons">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="facebook" aria-label="Bagikan di Facebook">
+                    <i class="bi bi-facebook"></i> Facebook
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent('Lihat produk keren ini di Lokalook: ' + produkDetail.nama)}" target="_blank" class="twitter" aria-label="Bagikan di Twitter">
+                    <i class="bi bi-twitter"></i> Twitter
+                  </a>
+                  <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('Cek produk ini di Lokalook: ' + produkDetail.nama + ' ' + window.location.href)}" target="_blank" class="whatsapp" aria-label="Bagikan di WhatsApp">
+                    <i class="bi bi-whatsapp"></i> WhatsApp
+                  </a>
+                </div>
+              </div>
+
+              <a href="produk.html" class="btn btn-back-to-products" aria-label="Kembali ke halaman produk">
+                <i class="bi bi-arrow-left"></i> Kembali ke Produk
+              </a>
+            </div>
+          </div>
+
+          <div class="product-reviews">
+            <h2>Ulasan Produk</h2>
+            ${reviewsHtml}
+          </div>
+
+          <div class="related-products">
+            <h2>Produk Terkait</h2>
+            <div class="related-products-grid">
+              ${relatedProductsHtml}
+            </div>
+          </div>
+        `;
+
+        // Handle image loading to remove spinner
+        const mainProductImage = detailMainEl.querySelector('.main-product-image');
+        const productImageGallery = detailMainEl.querySelector('.product-image-gallery');
+        mainProductImage.onload = () => {
+          productImageGallery.classList.remove('loading');
+        };
+        mainProductImage.onerror = () => {
+          productImageGallery.classList.remove('loading');
+          mainProductImage.alt = 'Gambar tidak dapat dimuat';
+          mainProductImage.src = 'https://via.placeholder.com/350x350.png?text=Gambar+Rusak'; // Fallback image
+        };
+
+      } else {
+        document.title = `Produk Tidak Ditemukan - Lokalook`;
+        detailMainEl.innerHTML = `
+          <div class="product-not-found">
+            <p><i class="bi bi-exclamation-circle"></i> Produk tidak ditemukan.</p>
+            <a href="produk.html" class="btn btn-back-to-products" aria-label="Kembali ke halaman produk">
+              <i class="bi bi-arrow-left"></i> Kembali ke Produk
+            </a>
+          </div>
+        `;
+      }
+    }
+
+    /**
+     * Changes the main product image when a thumbnail is clicked.
+     * @param {HTMLElement} clickedThumbnail - The thumbnail image element that was clicked.
+     */
+    function changeMainImage(clickedThumbnail) {
+        const mainImage = document.querySelector('.main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        // Remove active class from all thumbnails
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        // Add active class to the clicked thumbnail
+        clickedThumbnail.classList.add('active');
+
+        // Update the main image source
+        mainImage.src = clickedThumbnail.dataset.src;
+        mainImage.alt = clickedThumbnail.alt;
+    }
+
+
+    /**
+     * Changes the quantity of the product in the input field.
+     * @param {number} delta - The amount to change the quantity by (-1 for decrement, 1 for increment).
+     */
+    function changeQuantity(delta) {
+      const quantityInput = document.getElementById('product-quantity');
+      let quantity = parseInt(quantityInput.value) + delta;
+      if (quantity < 1) quantity = 1;
+      if (quantity > 99) quantity = 99; // Cap at 99 for reasonable limits
+      quantityInput.value = quantity;
+    }
+
+    /**
+     * Validates the quantity input to ensure it's within acceptable range.
+     */
+    function validateQuantity() {
+      const quantityInput = document.getElementById('product-quantity');
+      let quantity = parseInt(quantityInput.value);
+      if (isNaN(quantity) || quantity < 1) quantity = 1;
+      if (quantity > 99) quantity = 99;
+      quantityInput.value = quantity;
+    }
+
+    /**
+     * Adds the selected product to the shopping cart (localStorage).
+     * @param {string} produkId - The ID of the product to add.
+     */
+    function tambahKeKeranjang(produkId) {
+      const itemToAdd = produkData.find(p => p.id === produkId);
+      if (!itemToAdd) return;
+
+      const quantityInput = document.getElementById('product-quantity');
+      const quantity = parseInt(quantityInput.value);
+
+      let keranjang = JSON.parse(localStorage.getItem('keranjangLokalook')) || [];
+      const existingItemIndex = keranjang.findIndex(p => p.id === itemToAdd.id);
+
+      if (existingItemIndex > -1) {
+        // Update quantity if item already exists
+        keranjang[existingItemIndex].quantity = (keranjang[existingItemIndex].quantity || 0) + quantity;
+        showToast(`${quantity} ${itemToAdd.nama} berhasil ditambahkan (jumlah diperbarui)!`);
+      } else {
+        // Add new item to cart
+        keranjang.push({...itemToAdd, quantity: quantity, gambar: Array.isArray(itemToAdd.gambar) ? itemToAdd.gambar[0] : itemToAdd.gambar }); // Store only the first image
+        showToast(`${quantity} ${itemToAdd.nama} berhasil ditambahkan ke keranjang!`);
+      }
+      localStorage.setItem('keranjangLokalook', JSON.stringify(keranjang));
+      updateCartCount();
+
+      // Add animation to the add to cart button
+      const addToCartBtn = document.querySelector('.btn-add-to-cart');
+      addToCartBtn.classList.add('added-to-cart');
+      addToCartBtn.addEventListener('animationend', () => {
+        addToCartBtn.classList.remove('added-to-cart');
+      }, { once: true });
+    }
+
+    /**
+     * Simulates buying a product now. In a real application, this would redirect to a checkout page.
+     * @param {string} produkId - The ID of the product to buy.
+     */
+    function beliSekarang(produkId) {
+        const itemToBuy = produkData.find(p => p.id === produkId);
+        if (!itemToBuy) return;
+
+        const quantityInput = document.getElementById('product-quantity');
+        const quantity = parseInt(quantityInput.value);
+
+        // In a real scenario, this would likely add to cart and redirect to checkout
+        // For demonstration, we'll just show a toast and log.
+        console.log(`Membeli ${quantity} unit ${itemToBuy.nama} sekarang.`);
+        showToast(`Membeli ${quantity} ${itemToBuy.nama} sekarang! Mengarahkan ke pembayaran...`);
+
+        // Simulate redirect after a short delay
+        setTimeout(() => {
+            window.location.href = `checkout.html?id=${produkId}&qty=${quantity}`; // Example redirect
+        }, 1500);
+    }
+
+    /**
+     * Updates the cart count displayed in the header.
+     */
+    function updateCartCount() {
+      const keranjang = JSON.parse(localStorage.getItem('keranjangLokalook')) || [];
+      const totalItems = keranjang.reduce((sum, item) => sum + (item.quantity || 0), 0);
+      if (totalItems > 0) {
+        cartCountEl.textContent = totalItems;
+        cartCountEl.style.display = 'inline-flex'; /* Use flex to center single digit */
+      } else {
+        cartCountEl.style.display = 'none';
+      }
+    }
+    
+    /**
+     * Toggles the visibility of the mobile navigation menu.
+     */
+    function toggleMenu() {
+      const nav = document.getElementById('nav-menu');
+      nav.classList.toggle('show');
+      const isExpanded = nav.classList.contains('show');
+      document.querySelector('.menu-toggle').setAttribute('aria-expanded', isExpanded);
+    }
+
+    /**
+     * Sets the initial theme (dark/light) based on localStorage or system preference.
+     */
+    function setInitialTheme() {
+      const savedTheme = localStorage.getItem('themeLokalook');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const themeIcon = themeToggleBtn.querySelector('i');
+
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark-mode');
+        themeIcon.className = 'bi bi-brightness-high-fill'; // Sun icon
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeIcon.className = 'bi bi-moon-stars-fill'; // Moon icon
+      }
+    }
+
+    /**
+     * Event listener for the theme toggle button.
+     */
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const themeIcon = themeToggleBtn.querySelector('i');
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('themeLokalook', 'dark');
+        themeIcon.className = 'bi bi-brightness-high-fill';
+      } else {
+        localStorage.setItem('themeLokalook', 'light');
+        themeIcon.className = 'bi bi-moon-stars-fill';
+      }
+    });
+
+    /**
+     * Handles the scroll event to show/hide the back-to-top button.
+     */
+    function handleScroll() {
+        if (window.scrollY > 200) { // Show button after scrolling 200px
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    }
+
+    /**
+     * Scrolls the page smoothly to the top.
+     */
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Set current year in footer
+    currentYearEl.textContent = new Date().getFullYear();
+
+    // Make functions globally accessible for inline event handlers
+    window.changeQuantity = changeQuantity;
+    window.validateQuantity = validateQuantity;
+    window.tambahKeKeranjang = tambahKeKeranjang;
+    window.beliSekarang = beliSekarang;
+    window.toggleMenu = toggleMenu;
+    window.changeMainImage = changeMainImage;
+
+
+    // Initial Setup on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+      setInitialTheme();
+      updateCartCount();
+      renderProductDetail();
+
+      // Set active navigation link based on current page
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('#nav-menu a').forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Add event listener for back to top button
+      backToTopBtn.addEventListener('click', scrollToTop);
+    });
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+  </script>
+</body>
+</html>

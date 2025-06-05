@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Produk - Lokalook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* :root pseudo-class to define global CSS Custom Properties */
+        :root {
+            /* Light Theme (Default) - Teal & Gold Palette */
+            --bg-color: #f8fcfc; /* Very light teal/white */
+            --text-color: #2c3e50; /* Dark blue-grey for text */
+            --card-bg-color: #ffffff;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 12px 30px rgba(23, 162, 184, 0.2); /* Teal hover shadow, slightly stronger */
+            --header-bg-start: #f5eada; /* Darker teal */
+            --header-bg-end: #17a2b8;    /* Main teal */
+            --header-bg-solid: #17a2b8; /* For mobile nav dropdown */
+            --header-text-color: #a71930;
+            --accent-color: #f5eada; /* Main teal */
+            --accent-color-darker: #00606f; /* Darker teal for hover */
+            --secondary-text-color: #7f8c8d; /* Muted grey for secondary text */
+            --footer-bg-color: #e0f2f7; /* Light teal tint */
+            --input-bg-color: #fff;
+            --input-border-color: #cce7e8; /* Lighter teal border */
+            --border-light: #e0e0e0;
+            --loading-spinner-color: var(--accent-color);
+
+            /* Shared Variables */
+            --header-padding: 1rem 2rem;
+            --logo-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --font-primary: 'Poppins', sans-serif;
+            --font-size-logo: 1.8rem;
+            --font-weight-logo: bold;
+            --font-weight-nav: 600;
+            --logo-gap: 0.75rem;
+            --nav-gap: 1.75rem;
+            --nav-link-padding: 0.4rem 0;
+            --transition-duration: 0.3s;
+            --transition-timing-function: ease-in-out; /* Changed for smoother animations */
+            --border-radius-main: 12px;
+            --border-radius-small: 8px;
+            --border-radius-micro: 3px;
+            --z-index-sticky-header: 1000;
+            --max-width-main: 1100px;
+        }
+
+        /* Dark Theme Variables - Teal & Gold Palette */
+        body.dark-mode {
+            --bg-color: #212121; /* Dark grey */
+            --text-color: #e0e0e0;
+            --card-bg-color: #333333;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 12px 30px rgba(23, 162, 184, 0.35); /* Dark mode teal hover shadow, stronger */
+            --header-bg-start: #004d55; /* Darker teal for dark mode header */
+            --header-bg-end: #00606f;    /* Teal for dark mode header */
+            --header-bg-solid: #00606f;
+            --header-text-color: #f0f0f0;
+            --secondary-text-color: #aaaaaa;
+            --footer-bg-color: #1a1a1a;
+            --input-bg-color: #444444;
+            --input-border-color: #666666;
+            --border-light: #555555;
+            --loading-spinner-color: var(--accent-color);
+        }
+
+        /* General Styling */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-duration) var(--transition-timing-function),
+                        color var(--transition-duration) var(--transition-timing-function);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Visually Hidden Utility */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(90deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+            color: var(--header-text-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--header-padding);
+            position: sticky;
+            top: 0;
+            z-index: var(--z-index-sticky-header);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: saturate(180%) blur(10px);
+            -webkit-backdrop-filter: saturate(180%) blur(10px);
+        }
+
+        .logo {
+            font-size: var(--font-size-logo);
+            font-weight: var(--font-weight-logo);
+            display: flex;
+            align-items: center;
+            gap: var(--logo-gap);
+            cursor: pointer;
+            text-shadow: var(--logo-text-shadow);
+            color: var(--header-text-color);
+            text-decoration: none;
+        }
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: var(--nav-gap);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--header-text-color);
+            font-weight: var(--font-weight-nav);
+            padding: var(--nav-link-padding);
+            position: relative;
+            transition: color var(--transition-duration) var(--transition-timing-function),
+                        transform var(--transition-duration) var(--transition-timing-function);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2.5px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width var(--transition-duration) var(--transition-timing-function);
+            border-radius: var(--border-radius-micro);
+        }
+
+        nav a:hover,
+        nav a.active,
+        nav a:focus-visible {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+            outline: none;
+        }
+        nav a:hover::after,
+        nav a.active::after,
+        nav a:focus-visible::after {
+            width: 100%;
+        }
+
+        .nav-tools {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-link {
+            position: relative;
+            color: var(--header-text-color);
+            text-decoration: none;
+            transition: color var(--transition-duration) var(--transition-timing-function);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .cart-link:hover {
+            color: var(--accent-color);
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            padding: 0.1em 0.4em;
+            font-size: 0.7rem;
+            font-weight: bold;
+            line-height: 1;
+            min-width: 1.2em;
+            text-align: center;
+            opacity: 0; /* Initially hidden */
+            transform: scale(0.5); /* Initially smaller */
+            transition: opacity var(--transition-duration) var(--transition-timing-function),
+                        transform var(--transition-duration) var(--transition-timing-function);
+        }
+        .cart-count.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--header-text-color);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            display: flex;
+            align-items: center;
+            transition: color var(--transition-duration) var(--transition-timing-function);
+        }
+        .theme-toggle:hover, .theme-toggle:focus-visible {
+            color: var(--accent-color);
+            outline: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--header-text-color);
+            cursor: pointer;
+            padding: 0.25rem;
+            transition: transform var(--transition-duration) var(--transition-timing-function);
+        }
+        .menu-toggle:active {
+            transform: scale(0.9);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+            nav {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                background: var(--header-bg-solid);
+                position: absolute;
+                top: 100%;
+                right: 0;
+                padding: 1rem;
+                width: 220px;
+                box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+                border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: opacity var(--transition-duration) var(--transition-timing-function),
+                            visibility var(--transition-duration) var(--transition-timing-function),
+                            transform var(--transition-duration) var(--transition-timing-function);
+            }
+
+            nav.show {
+                display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            nav a {
+                width: 100%;
+                padding: 0.75rem 0.5rem;
+            }
+            nav a::after {
+                bottom: 0.25rem;
+            }
+            .nav-tools {
+                width: 100%;
+                justify-content: space-between;
+                padding: 0.5rem 0.5rem 0;
+                border-top: 1px solid var(--border-light);
+                margin-top: 0.5rem;
+            }
+            .theme-toggle {
+                font-size: 1.5rem;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        main {
+            max-width: var(--max-width-main);
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--accent-color-darker);
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+            font-weight: 700; /* Slightly bolder */
+        }
+
+        .filters-and-search {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 400px;
+        }
+        #search-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius-small);
+            width: 100%;
+            font-size: 1rem;
+            background-color: var(--input-bg-color);
+            color: var(--text-color);
+            transition: border-color var(--transition-duration) var(--transition-timing-function),
+                        box-shadow var(--transition-duration) var(--transition-timing-function);
+        }
+        #search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.2);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+        .filter-btn {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius-small);
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            transition: background-color var(--transition-duration) var(--transition-timing-function),
+                        color var(--transition-duration) var(--transition-timing-function),
+                        border-color var(--transition-duration) var(--transition-timing-function),
+                        transform var(--transition-duration) var(--transition-timing-function);
+        }
+        .filter-btn:hover, .filter-btn:focus-visible {
+            border-color: var(--accent-color);
+            outline: none;
+            transform: translateY(-3px); /* Increased translateY for more pop */
+        }
+        .filter-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3); /* Add shadow to active button */
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .order-item {
+            background: var(--card-bg-color);
+            border-radius: var(--border-radius-main);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-duration) var(--transition-timing-function),
+                        box-shadow var(--transition-duration) var(--transition-timing-function);
+            display: flex;
+            flex-direction: column;
+            opacity: 0; /* For fade-in animation */
+            transform: translateY(20px); /* For slight slide-up */
+            animation: fadeInSlideUp 0.5s forwards var(--transition-timing-function);
+        }
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .order-item .img-link {
+            display: block;
+            border-bottom: 4px solid var(--accent-color);
+        }
+        .order-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s var(--transition-timing-function);
+        }
+        .order-item:hover img {
+            transform: scale(1.05); /* Zoom effect on image hover */
+        }
+
+        .order-info {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .order-info h4 {
+            margin: 0 0 0.5rem;
+            font-size: 1.25rem;
+            color: var(--text-color);
+        }
+        .order-info .product-name-link {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-duration) var(--transition-timing-function);
+        }
+        .order-info .product-name-link:hover {
+            color: var(--accent-color);
+        }
+
+        .price {
+            color: var(--accent-color-darker);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: var(--input-bg-color);
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius-small);
+            padding: 0.25rem 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .quantity-control button {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0 0.5rem;
+            color: var(--text-color);
+            transition: color var(--transition-duration) var(--transition-timing-function),
+                        transform var(--transition-duration) var(--transition-timing-function);
+        }
+        .quantity-control button:hover {
+            color: var(--accent-color-darker);
+            transform: translateY(-1px);
+        }
+        .quantity-control input[type="number"] {
+            width: 50px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 1rem;
+            padding: 0;
+            -moz-appearance: textfield;
+            /* Remove blue highlight on iOS */
+            -webkit-tap-highlight-color: transparent;
+        }
+        .quantity-control input::-webkit-outer-spin-button,
+        .quantity-control input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .quantity-control button:hover,
+        .quantity-control button:focus-visible {
+            color: var(--accent-color);
+            outline: none;
+            transform: scale(1.1); /* Pop effect on quantity buttons */
+        }
+
+        .quantity-control span {
+            font-size: 1rem;
+            min-width: 24px;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .btn-tambah {
+            background-color: var(--accent-color);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: auto;
+            transition: background-color var(--transition-duration) var(--transition-timing-function),
+                        transform var(--transition-duration) var(--transition-timing-function),
+                        box-shadow var(--transition-duration) var(--transition-timing-function);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-tambah:hover, .btn-tambah:focus-visible {
+            background-color: var(--accent-color-darker);
+            outline: none;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.4); /* Add shadow to add to cart button */
+        }
+
+        #no-produk {
+            text-align: center;
+            width: 100%;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            display: none; /* Controlled by JS */
+            opacity: 0; /* For fade-in animation */
+            transition: opacity 0.5s var(--transition-timing-function);
+        }
+        #no-produk.show {
+            opacity: 1;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 4px solid var(--border-light);
+            border-top: 4px solid var(--loading-spinner-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+        .loading-spinner.show {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-small);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .toast-notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: background-color var(--transition-duration) var(--transition-timing-function),
+                        transform var(--transition-duration) var(--transition-timing-function);
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #back-to-top:hover {
+            background-color: var(--accent-color-darker);
+            transform: translateY(-5px) scale(1.05); /* More pronounced hover */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        #back-to-top:active {
+            transform: translateY(-2px) scale(0.95);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: var(--footer-bg-color);
+            color: var(--secondary-text-color);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            transition: background-color var(--transition-duration) var(--transition-timing-function),
+                        color var(--transition-duration) var(--transition-timing-function);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo" aria-label="Lokalook Homepage">
+            <img src="assets/lokalook-logo.png" alt="Lokalook Logo" style="height: 100px;" />
+        </a>
+        <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" onclick="toggleMenu()">
+            <i class="bi bi-list"></i>
+        </button>
+        <nav id="nav-menu">
+            <a href="index.html">Beranda</a>
+            <a href="produk.html" class="active">Produk</a>
+            <div class="nav-tools">
+                <a href="keranjang.html" class="cart-link" aria-label="Keranjang Belanja">
+                    <i class="bi bi-cart"></i> Keranjang
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="bi bi-moon-stars-fill"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="page-title">Koleksi Produk Lokal Terbaik</h2>
+
+        <div class="filters-and-search">
+            <div class="search-container">
+                <label for="search-input" class="visually-hidden">Cari produk:</label>
+                <input type="search" id="search-input" placeholder="Cari produk..." aria-label="Cari produk">
+            </div>
+
+            <div class="filters" id="category-filters">
+                <button class="filter-btn active" data-category="all">Semua Produk</button>
+                <button class="filter-btn" data-category="pakaian">Pakaian</button>
+                <button class="filter-btn" data-category="aksesoris">Aksesoris</button>
+                <button class="filter-btn" data-category="kerajinan">Kerajinan</button>
+            </div>
+        </div>
+
+        <section class="order-container" id="produk-list" aria-live="polite" aria-atomic="true">
+            <div class="loading-spinner" id="loading-spinner" role="status" aria-label="Memuat produk..."></div>
+            <p id="no-produk">Produk tidak ditemukan.</p>
+        </section>
+    </main>
+
+    <button id="back-to-top" aria-label="Gulir ke atas halaman">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <div id="toast-notification" class="toast-notification" aria-live="polite" aria-atomic="true" style="display: none;">
+        <i class="bi bi-check-circle-fill"></i> <span id="toast-message"></span>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Lokalook. Hak cipta dilindungi.</p>
+    </footer>
+
+    <script>
+        // Simulate product data with categories
+        const produkData = [
+            { id: 'P001', nama: 'Baju Wanita', harga: 120000, gambar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJoO_Q3E6PQbeVP-QifekzowpUBQGKtq5vSMyhTSh9dhH2Yph3NQoqmPbeTT_cjmzExUg&usqp=CAU', category: 'pakaian' },
+            { id: 'P002', nama: 'Kemeja Batik Wanita', harga: 125000, gambar: 'https://cdn1-production-images-kly.akamaized.net/Yy7PeJEYzVVBNQYCdawQndcYwM0=/500x500/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/5184952/original/034407900_1744353483-1c9747d99ebbbead42a182bd975fc130.jpg', category: 'pakaian' },
+            { id: 'P003', nama: 'Hoodie Nyaman Banget', harga: 145000, gambar: 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/6/1/2810e5bb-8466-4d4b-8e4f-200d20a42762.jpg', category: 'pakaian' },
+            { id: 'P004', nama: 'Celana Chino Kasual', harga: 110000, gambar: 'https://via.placeholder.com/300x220.png?text=Celana+Chino', category: 'pakaian' },
+            { id: 'A001', nama: 'Gelang Tali Etnik', harga: 35000, gambar: 'https://via.placeholder.com/300x220.png?text=Gelang+Etnik', category: 'aksesoris' },
+            { id: 'A002', nama: 'Topi Distro Lokal', harga: 60000, gambar: 'https://via.placeholder.com/300x220.png?text=Topi+Distro', category: 'aksesoris' },
+            { id: 'K001', nama: 'Kerajinan Tangan Anyaman', harga: 80000, gambar: 'https://via.placeholder.com/300x220.png?text=Anyaman+Cantik', category: 'kerajinan' },
+            { id: 'K002', nama: 'Pajangan Meja Kayu', harga: 95000, gambar: 'https://via.placeholder.com/300x220.png?text=Pajangan+Kayu', category: 'kerajinan' },
+        ];
+
+        const produkListEl = document.getElementById('produk-list');
+        const searchInput = document.getElementById('search-input');
+        const noProdukEl = document.getElementById('no-produk');
+        const cartCountEl = document.getElementById('cart-count');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const currentYearEl = document.getElementById('current-year');
+        const categoryFiltersEl = document.getElementById('category-filters');
+        const loadingSpinnerEl = document.getElementById('loading-spinner');
+        const backToTopBtn = document.getElementById('back-to-top');
+        const navMenu = document.getElementById('nav-menu');
+        const toastNotification = document.getElementById('toast-notification');
+        const toastMessage = document.getElementById('toast-message');
+
+        let currentCategory = 'all'; // Default filter category
+        let searchTimeout; // For debouncing search input
+
+        /**
+         * Displays the loading spinner and clears product list/no product message.
+         */
+        function showLoadingSpinner() {
+            produkListEl.innerHTML = '';
+            noProdukEl.classList.remove('show');
+            noProdukEl.style.display = 'none'; // Ensure display is none before transition
+            loadingSpinnerEl.style.display = 'block'; // Make sure it's visible before adding class
+            setTimeout(() => loadingSpinnerEl.classList.add('show'), 10); // Add class for fade-in animation
+        }
+
+        /**
+         * Hides the loading spinner.
+         */
+        function hideLoadingSpinner() {
+            loadingSpinnerEl.classList.remove('show');
+            // Allow time for fade-out before setting display to none
+            setTimeout(() => {
+                loadingSpinnerEl.style.display = 'none';
+            }, 300);
+        }
+
+        /**
+         * Renders the product items into the DOM.
+         * @param {Array} itemsToRender - An array of product objects to render.
+         */
+        function renderProduk(itemsToRender = produkData) {
+            showLoadingSpinner();
+
+            // Simulate network delay
+            setTimeout(() => {
+                produkListEl.innerHTML = ''; // Clear existing products
+                if (itemsToRender.length === 0) {
+                    noProdukEl.style.display = 'block'; // Make sure it's visible before adding class
+                    setTimeout(() => noProdukEl.classList.add('show'), 10); // Add class for fade-in
+                } else {
+                    noProdukEl.classList.remove('show');
+                    noProdukEl.style.display = 'none';
+                    itemsToRender.forEach((p, index) => {
+                        const article = document.createElement('article');
+                        article.className = 'order-item';
+                        // Add a slight delay for each item for a staggered animation effect
+                        article.style.animationDelay = `${index * 0.05}s`;
+                        article.innerHTML = `
+                            <a href="detail.html?id=${p.id}" class="img-link">
+                                <img src="${p.gambar}" alt="${p.nama}" loading="lazy" />
+                            </a>
+                            <div class="order-info">
+                                <a href="detail.html?id=${p.id}" class="product-name-link">
+                                    <h4>${p.nama}</h4>
+                                </a>
+                                <p class="price">Rp ${p.harga.toLocaleString('id-ID')}</p>
+                                <div class="quantity-control">
+                                    <button type="button" onclick="changeQuantity(this, -1)" aria-label="Kurangi jumlah"><i class="bi bi-dash-circle"></i></button>
+                                    <input type="number" value="1" min="1" max="99" onchange="validateQuantity(this)" aria-label="Jumlah produk">
+                                    <button type="button" onclick="changeQuantity(this, 1)" aria-label="Tambah jumlah"><i class="bi bi-plus-circle"></i></button>
+                                </div>
+                                <button type="button" class="btn-tambah" onclick="tambahKeranjang('${p.id}', this)" aria-label="Tambah ${p.nama} ke keranjang">
+                                    <i class="bi bi-cart-plus-fill"></i> Tambah
+                                </button>
+                            </div>
+                        `;
+                        produkListEl.appendChild(article);
+                    });
+                }
+                hideLoadingSpinner();
+            }, 500); // Simulate 0.5 second loading time
+        }
+
+        /**
+         * Changes the quantity of a product in the quantity control.
+         * @param {HTMLButtonElement} button - The button element (+ or -) that was clicked.
+         * @param {number} delta - The amount to change the quantity by (1 or -1).
+         */
+        function changeQuantity(button, delta) {
+            const input = button.parentNode.querySelector('input[type="number"]');
+            let quantity = parseInt(input.value) + delta;
+            if (quantity < 1) quantity = 1;
+            if (quantity > 99) quantity = 99; // Cap at 99
+            input.value = quantity;
+            // Trigger input change for accessibility or other listeners
+            input.dispatchEvent(new Event('change'));
+        }
+
+        /**
+         * Validates and corrects the quantity input value.
+         * @param {HTMLInputElement} input - The input element to validate.
+         */
+        function validateQuantity(input) {
+            let quantity = parseInt(input.value);
+            if (isNaN(quantity) || quantity < 1) quantity = 1;
+            if (quantity > 99) quantity = 99;
+            input.value = quantity;
+        }
+
+        /**
+         * Adds a product to the shopping cart in localStorage.
+         * Displays a toast notification upon successful addition.
+         * @param {string} produkId - The ID of the product to add.
+         * @param {HTMLButtonElement} buttonElement - The "Tambah" button element clicked.
+         */
+        function tambahKeranjang(produkId, buttonElement) {
+            const itemToAdd = produkData.find(p => p.id === produkId);
+            if (!itemToAdd) return;
+
+            const quantityInput = buttonElement.closest('.order-info').querySelector('.quantity-control input');
+            const quantity = parseInt(quantityInput.value);
+
+            let keranjang = JSON.parse(localStorage.getItem('keranjangLokalook')) || [];
+            const existingItemIndex = keranjang.findIndex(p => p.id === itemToAdd.id);
+
+            if (existingItemIndex > -1) {
+                keranjang[existingItemIndex].quantity = (keranjang[existingItemIndex].quantity || 0) + quantity;
+                showToastNotification(`${quantity} ${itemToAdd.nama} berhasil ditambahkan (jumlah diperbarui)!`);
+            } else {
+                keranjang.push({...itemToAdd, quantity: quantity });
+                showToastNotification(`${quantity} ${itemToAdd.nama} berhasil ditambahkan ke keranjang!`);
+            }
+            localStorage.setItem('keranjangLokalook', JSON.stringify(keranjang));
+            updateCartCount();
+        }
+
+        /**
+         * Shows a temporary toast notification.
+         * @param {string} message - The message to display in the toast.
+         */
+        function showToastNotification(message) {
+            toastMessage.textContent = message;
+            toastNotification.style.display = 'flex'; // Ensure display is flex for animation
+            setTimeout(() => toastNotification.classList.add('show'), 10);
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+                // Hide after transition ends
+                toastNotification.addEventListener('transitionend', function handler() {
+                    toastNotification.style.display = 'none';
+                    toastNotification.removeEventListener('transitionend', handler);
+                });
+            }, 3000);
+        }
+
+        /**
+         * Updates the shopping cart item count displayed in the header.
+         */
+        function updateCartCount() {
+            const keranjang = JSON.parse(localStorage.getItem('keranjangLokalook')) || [];
+            const totalItems = keranjang.reduce((sum, item) => sum + (item.quantity || 0), 0);
+            if (totalItems > 0) {
+                cartCountEl.textContent = totalItems;
+                cartCountEl.classList.add('show'); // Show with animation
+            } else {
+                cartCountEl.classList.remove('show'); // Hide with animation
+                // Ensure the element is completely hidden after the animation
+                setTimeout(() => {
+                    if (!cartCountEl.classList.contains('show')) {
+                        cartCountEl.style.display = 'none';
+                    }
+                }, 300);
+            }
+        }
+
+        /**
+         * Toggles the visibility of the mobile navigation menu.
+         */
+        function toggleMenu() {
+            navMenu.classList.toggle('show');
+            const isExpanded = navMenu.classList.contains('show');
+            document.querySelector('.menu-toggle').setAttribute('aria-expanded', isExpanded);
+        }
+
+        /**
+         * Applies the current category filter and search term to the product list.
+         * Debounces the search input to prevent excessive re-rendering.
+         */
+        function applyFiltersAndSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let filteredProduk = produkData;
+
+                if (currentCategory !== 'all') {
+                    filteredProduk = filteredProduk.filter(p => p.category === currentCategory);
+                }
+
+                if (searchTerm) {
+                    filteredProduk = filteredProduk.filter(p =>
+                        p.nama.toLowerCase().includes(searchTerm)
+                    );
+                }
+                renderProduk(filteredProduk);
+            }, 300); // Debounce time of 300ms
+        }
+
+        /**
+         * Sets the initial theme (dark/light) based on localStorage or system preference.
+         */
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('themeLokalook');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const themeIcon = themeToggleBtn.querySelector('i');
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.classList.add('dark-mode');
+                themeIcon.className = 'bi bi-brightness-high-fill'; // Sun icon
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeIcon.className = 'bi bi-moon-stars-fill'; // Moon icon
+            }
+        }
+
+        // Dark Mode Toggle Event Listener
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const themeIcon = themeToggleBtn.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('themeLokalook', 'dark');
+                themeIcon.className = 'bi bi-brightness-high-fill';
+            } else {
+                localStorage.setItem('themeLokalook', 'light');
+                themeIcon.className = 'bi bi-moon-stars-fill';
+            }
+        });
+
+        // Back to Top functionality
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'flex'; // Use flex to center icon
+                setTimeout(() => backToTopBtn.style.opacity = '1', 10);
+            } else {
+                backToTopBtn.style.opacity = '0';
+                setTimeout(() => backToTopBtn.style.display = 'none', 300); // Hide after fade out
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Set current year in footer
+        currentYearEl.textContent = new Date().getFullYear();
+
+        // Event Listeners
+        searchInput.addEventListener('input', applyFiltersAndSearch);
+
+        categoryFiltersEl.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target.classList.contains('filter-btn')) {
+                categoryFiltersEl.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                target.classList.add('active');
+                currentCategory = target.dataset.category;
+                applyFiltersAndSearch();
+            }
+        });
+
+        // Initial Setup on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setInitialTheme();
+            updateCartCount();
+            applyFiltersAndSearch(); // Initial render with filters
+
+            // Set active navigation link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
