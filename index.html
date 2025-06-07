@@ -1,497 +1,497 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Look - Gaya Khas Nusantara</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Look - Gaya Khas Nusantara</title>
 
-    <meta name="description" content="Temukan koleksi fashion eksklusif Local Look yang memadukan tren modern dengan warisan budaya Nusantara. Kualitas premium, desain unik, dan pelayanan responsif." />
+    <meta name="description" content="Temukan koleksi fashion eksklusif Local Look yang memadukan tren modern dengan warisan budaya Nusantara. Kualitas premium, desain unik, dan pelayanan responsif." />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <style>
-        /* --- Variabel Warna & Font --- */
-        :root {
-            --maroon: #800000;
-            --maroon-dark: #550000;
-            --nude: #f5e9e2;
-            --black: #1a1a1a;
-            --white: #ffffff;
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
-        }
+    <style>
+        /* --- Variabel Warna & Font --- */
+        :root {
+            --maroon: #800000;
+            --maroon-dark: #550000;
+            --nude: #f5e9e2;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
 
-        /* --- Reset dan Body --- */
-        body {
-            background-color: var(--nude);
-            color: var(--black);
-            font-family: var(--font-body);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6; /* Improved readability */
-        }
+        /* --- Reset dan Body --- */
+        body {
+            background-color: var(--nude);
+            color: var(--black);
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6; /* Improved readability */
+        }
 
-        /* --- Navbar --- */
-        .navbar {
-            background-color: var(--nude); /* Changed: Navbar background is now Nude */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 1rem 0;
-        }
-        .navbar-brand {
-            font-family: var(--font-heading);
-            font-size: 1.85rem; /* Adjusted size slightly */
-            font-weight: 700;
-            color: var(--maroon); /* Changed: Brand color is now Maroon */
-            text-decoration: none;
-        }
-        .navbar-brand img {
-            /* Adjusted for better visibility on nude background.
-               If your logo is already dark and visible, remove this filter. */
-            filter: brightness(0.8) saturate(1.2);
-        }
-        .nav-link {
-            color: var(--maroon); /* Changed: Nav links color is now Maroon */
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            font-size: 1.05rem; /* Slightly larger nav links */
-        }
-        .nav-link.active,
-        .nav-link:hover,
-        .nav-link:focus {
-            color: var(--maroon-dark); /* Changed: Hover/active color is now Maroon Dark */
-            text-decoration: none;
-        }
-        .cart-badge {
-            position: absolute;
-            top: 0;
-            right: -10px;
-            font-size: 0.75rem;
-            background-color: var(--maroon); /* Changed: Cart badge background is now Maroon */
-            color: var(--white); /* Changed: Cart badge text is now White */
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            box-shadow: 0 0 4px rgba(0,0,0,0.2);
-        }
-        .navbar-toggler {
-            border: none;
-            background-color: transparent;
-        }
-        .navbar-toggler-icon {
-            /* Changed: Standard Bootstrap dark toggler icon for light background */
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(128, 0, 0)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-        .navbar-toggler:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px var(--maroon);
-            border-radius: 4px;
-        }
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--nude); /* Changed: Navbar background is now Nude */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-size: 1.85rem; /* Adjusted size slightly */
+            font-weight: 700;
+            color: var(--maroon); /* Changed: Brand color is now Maroon */
+            text-decoration: none;
+        }
+        .navbar-brand img {
+            /* Adjusted for better visibility on nude background.
+               If your logo is already dark and visible, remove this filter. */
+            filter: brightness(0.8) saturate(1.2);
+        }
+        .nav-link {
+            color: var(--maroon); /* Changed: Nav links color is now Maroon */
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-size: 1.05rem; /* Slightly larger nav links */
+        }
+        .nav-link.active,
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--maroon-dark); /* Changed: Hover/active color is now Maroon Dark */
+            text-decoration: none;
+        }
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            font-size: 0.75rem;
+            background-color: var(--maroon); /* Changed: Cart badge background is now Maroon */
+            color: var(--white); /* Changed: Cart badge text is now White */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 0 4px rgba(0,0,0,0.2);
+        }
+        .navbar-toggler {
+            border: none;
+            background-color: transparent;
+        }
+        .navbar-toggler-icon {
+            /* Changed: Standard Bootstrap dark toggler icon for light background */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(128, 0, 0)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--maroon);
+            border-radius: 4px;
+        }
 
-        /* --- Tombol --- */
-        .btn-maroon {
-            background-color: var(--maroon);
-            color: var(--white);
-            border: none;
-            padding: 0.75rem 1.75rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-            box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
-        }
-        .btn-maroon:hover,
-        .btn-maroon:focus {
-            background-color: var(--maroon-dark);
-            color: var(--white);
-            text-decoration: none;
-            outline: none;
-            box-shadow: 0 3px 8px rgba(85, 0, 0, 0.7);
-        }
-        .btn-outline-maroon {
-            border: 1px solid var(--maroon);
-            color: var(--maroon);
-            background-color: transparent;
-            padding: 0.5rem 1.5rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-        }
-        .btn-outline-maroon:hover,
-        .btn-outline-maroon:focus {
-            background-color: var(--maroon);
-            color: var(--white);
-            text-decoration: none;
-            outline: none;
-            box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
-        }
-        /* New style for button with icon */
-        .btn-detail-with-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center; /* Center content if button is wider */
-            gap: 8px; /* Space between text and icon */
-        }
-        .btn-detail-with-icon i {
-            font-size: 1rem; /* Adjust icon size */
-        }
+        /* --- Tombol --- */
+        .btn-maroon {
+            background-color: var(--maroon);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
+        }
+        .btn-maroon:hover,
+        .btn-maroon:focus {
+            background-color: var(--maroon-dark);
+            color: var(--white);
+            text-decoration: none;
+            outline: none;
+            box-shadow: 0 3px 8px rgba(85, 0, 0, 0.7);
+        }
+        .btn-outline-maroon {
+            border: 1px solid var(--maroon);
+            color: var(--maroon);
+            background-color: transparent;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        .btn-outline-maroon:hover,
+        .btn-outline-maroon:focus {
+            background-color: var(--maroon);
+            color: var(--white);
+            text-decoration: none;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
+        }
+        /* New style for button with icon */
+        .btn-detail-with-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center; /* Center content if button is wider */
+            gap: 8px; /* Space between text and icon */
+        }
+        .btn-detail-with-icon i {
+            font-size: 1rem; /* Adjust icon size */
+        }
 
 
-        /* --- Hero Section --- */
-        .hero-section {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Cuplikan layar 2025-06-07 171527.png');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-        }
-        .hero-section h1 {
-            font-family: var(--font-heading);
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .hero-section p {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            margin-bottom: 2rem;
-        }
+        /* --- Hero Section --- */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/Cuplikan\ layar\ 2025-06-07\ 171527.png');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        .hero-section h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero-section p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-bottom: 2rem;
+        }
 
-        /* --- General Section Styling --- */
-        .section {
-            padding: 5rem 0;
-        }
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: clamp(2rem, 5vw, 2.75rem);
-            margin-bottom: 3rem;
-            text-align: center;
-            color: var(--maroon);
-            user-select: none;
-        }
+        /* --- General Section Styling --- */
+        .section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--maroon);
+            user-select: none;
+        }
 
-        /* --- Product Card --- */
-        .product-card {
-            border: none;
-            border-radius: 12px;
-            background-color: var(--white);
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-        .product-card img {
-            object-fit: cover;
-            max-height: 280px;
-            width: 100%;
-            transition: transform 0.3s ease;
-            user-select: none;
-        }
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-        .product-card .card-body {
-            padding: 1.25rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .product-card .card-title {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1.125rem;
-            margin-bottom: 0.75rem;
-            color: var(--black);
-            user-select: none;
-        }
-        .product-price {
-            color: var(--maroon);
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            user-select: none;
-        }
+        /* --- Product Card --- */
+        .product-card {
+            border: none;
+            border-radius: 12px;
+            background-color: var(--white);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .product-card img {
+            object-fit: cover;
+            max-height: 280px;
+            width: 100%;
+            transition: transform 0.3s ease;
+            user-select: none;
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        .product-card .card-body {
+            padding: 1.25rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .product-card .card-title {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: var(--black);
+            user-select: none;
+        }
+        .product-price {
+            color: var(--maroon);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            user-select: none;
+        }
 
-        /* --- Why Us / Feature Card --- */
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--maroon);
-            margin-bottom: 1rem;
-        }
-        .feature-title {
-            font-family: var(--font-body);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--black);
-        }
-        .feature-card {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        /* --- Why Us / Feature Card --- */
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--maroon);
+            margin-bottom: 1rem;
+        }
+        .feature-title {
+            font-family: var(--font-body);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--black);
+        }
+        .feature-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        /* --- Footer --- */
-        .footer {
-            background-color: var(--maroon); /* Changed from var(--black) to var(--maroon) */
-            padding: 3rem 1rem;
-            color: var(--white);
-            text-align: center;
-            user-select: none;
-        }
-        .footer .social-icons a {
-            color: var(--white);
-            font-size: 1.75rem;
-            margin: 0 15px;
-            transition: color 0.3s ease;
-        }
-        .footer .social-icons a:hover,
-        .footer .social-icons a:focus {
-            color: var(--nude); /* Changed hover color to nude for contrast */
-            text-decoration: none;
-            outline: none;
-        }
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 3rem 1rem;
+            color: var(--white);
+            text-align: center;
+            user-select: none;
+        }
+        .footer .social-icons a {
+            color: var(--white);
+            font-size: 1.75rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .footer .social-icons a:hover,
+        .footer .social-icons a:focus {
+            color: var(--maroon);
+            text-decoration: none;
+            outline: none;
+        }
 
-        /* --- Animasi On-Scroll --- */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+        /* --- Animasi On-Scroll --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="lokalook-logo.png" alt="Local Look Logo" style="height: 90px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto" role="menu">
-                    <li class="nav-item" role="none"><a class="nav-link active" href="index.html" aria-current="page" role="menuitem">Beranda</a></li>
-                    <li class="nav-item" role="none"><a class="nav-link" href="produk.html" role="menuitem">Produk</a></li>
-                    <li class="nav-item position-relative" role="none">
-                        <a class="nav-link" href="keranjang.html" role="menuitem" aria-label="Keranjang Belanja">
-                            Keranjang <span id="cart-badge" class="cart-badge d-none" aria-live="polite" aria-atomic="true">0</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/lokalook-logo.png" alt="Local Look Logo" style="height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" role="menu">
+                    <li class="nav-item" role="none"><a class="nav-link active" href="index.html" aria-current="page" role="menuitem">Beranda</a></li>
+                    <li class="nav-item" role="none"><a class="nav-link" href="produk.html" role="menuitem">Produk</a></li>
+                    <li class="nav-item position-relative" role="none">
+                        <a class="nav-link" href="keranjang.html" role="menuitem" aria-label="Keranjang Belanja">
+                            Keranjang <span id="cart-badge" class="cart-badge d-none" aria-live="polite" aria-atomic="true">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <main>
-        <header class="hero-section" role="banner">
-            <div class="container fade-in" style="--delay: 0s;">
-                <h1>Temukan Gaya, Dukung Lokal</h1>
-                <p>Temukan keunikan dalam setiap koleksi lokal. Bersama Lokalook, kami hadir untuk mengangkat brand fashion lokal melalui kolaborasi strategis dan teknologi yang relevan.</p>
-                <a href="produk.html" class="btn btn-maroon" role="button">Lihat Koleksi</a>
-            </div>
-        </header>
+    <main>
+        <header class="hero-section" role="banner">
+            <div class="container fade-in" style="--delay: 0s;">
+                <h1>Temukan Gaya, Dukung Lokal</h1>
+                <p>Temukan koleksi eksklusif yang memadukan tren fashion terkini dengan keindahan budaya lokal.</p>
+                <a href="produk.html" class="btn btn-maroon" role="button">Lihat Koleksi</a>
+            </div>
+        </header>
 
-        <section id="about" class="section" aria-labelledby="about-title">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6 fade-in">
-                        <h2 id="about-title" class="section-title text-start">Tentang Local Look</h2>
-                        <p><strong>Local Look</strong> adalah platform digital yang hadir untuk memberdayakan brand fashion lokal melalui kolaborasi bersama micro-influencer kampus. Kami percaya bahwa produk lokal memiliki potensi besar untuk tumbuh dan dikenal luas, selama didukung dengan strategi promosi yang tepat dan konten yang autentik.
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 fade-in">
+                        <h2 id="about-title" class="section-title text-start">Tentang Local Look</h2>
+                        <p><strong>Local Look</strong> adalah brand fashion lokal yang lahir dari kecintaan terhadap warisan budaya Indonesia. Kami percaya bahwa setiap helai kain memiliki cerita.</p>
+                        <p>Misi kami adalah menghadirkan pakaian berkualitas tinggi dengan desain modern yang tetap mengakar pada identitas bangsa. Kami berkomitmen untuk memberdayakan pengrajin lokal dan menggunakan bahan-bahan terbaik dari seluruh nusantara.</p>
+                    </div>
+                    <div class="col-md-6 text-center fade-in" style="--delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1784&auto=format&fit=crop" class="img-fluid rounded-3" alt="Tim Local Look bekerja di studio desain, menunjukkan fokus pada kualitas dan desain. " loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-Dengan menggabungkan kekuatan teknologi dan komunitas, kami membantu brand UMKM menjangkau audiens Gen Z dan milenial secara lebih efektif, membangun identitas merek yang kuat, dan meningkatkan visibilitas di pasar digital.
+        <section id="featured-products" class="section" style="background-color: var(--white);" aria-labelledby="featured-products-title">
+            <div class="container">
+                <h2 id="featured-products-title" class="section-title fade-in">Koleksi Unggulan Kami</h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.1s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Kemeja Batik Parang Modern, harga Rp 350.000">
+                            <img src="https://images.unsplash.com/photo-1581044777550-4cfa6ce670c0?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Kemeja Batik dengan motif Parang modern, berwarna biru dan putih." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Kemeja Batik "Parang Modern"</h3>
+                                <p class="product-price">Rp 350.000</p>
+                                <a href="detail.html?id=P001" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Kemeja Batik Parang Modern">
+                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.2s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Blouse Tenun Sumba Elegan, harga Rp 425.000">
+                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Blouse Tenun berwarna coklat dan krem, dengan motif etnik khas Sumba." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Blouse Tenun "Sumba Elegan"</h3>
+                                <p class="product-price">Rp 425.000</p>
+                                <a href="detail.html?id=P002" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Blouse Tenun Sumba Elegan">
+                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.3s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Outer Kimono Nusa Dua, harga Rp 299.000">
+                            <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?q=80&w=1972&auto=format&fit=crop" class="card-img-top" alt="Outer Kimono berwarna hijau sage, dengan potongan longgar." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Outer Kimono "Nusa Dua"</h3>
+                                <p class="product-price">Rp 299.000</p>
+                                <a href="detail.html?id=P003" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Outer Kimono Nusa Dua">
+                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.4s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Celana Kulot Senja, harga Rp 275.000">
+                            <img src="https://images.unsplash.com/photo-1551803091-e25622d22262?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Celana Kulot berwarna krem atau nude, cocok untuk gaya kasual." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Celana Kulot "Senja"</h3>
+                                <p class="product-price">Rp 275.000</p>
+                                <a href="detail.html?id=P004" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Celana Kulot Senja">
+                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-Kami berkomitmen untuk menjadi ruang kolaborasi kreatif, tempat brand lokal bisa berkembang, dikenal, dan dicintai—baik di media sosial maupun di keseharian konsumennya.</p>
-                    </div>
-                    <div class="col-md-6 text-center fade-in" style="--delay: 0.2s;">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSj5LOvxjP_j-8Qb2Nc5Qqk46E0MDrsJDS7A&s" class="img-fluid rounded-3" alt="Tim Local Look bekerja di studio desain, menunjukkan fokus pada kualitas dan desain. " loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="why-us" class="section" aria-labelledby="why-us-title">
+            <div class="container">
+                <h2 id="why-us-title" class="section-title fade-in">Kenapa Memilih Kami?</h2>
+                <div class="row g-4">
+                    <div class="col-md-4 fade-in" style="--delay: 0.1s;">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-gem" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-title">Kualitas Terbaik</h3>
+                            <p>Kami menggunakan bahan-bahan premium dan dikerjakan oleh pengrajin berpengalaman untuk memastikan setiap produk nyaman dipakai dan tahan lama.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in" style="--delay: 0.2s;">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-palette" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-title">Desain Eksklusif</h3>
+                            <p>Setiap koleksi dirancang secara unik dengan memadukan tren modern dan sentuhan budaya nusantara yang tidak akan Anda temukan di tempat lain.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in" style="--delay: 0.3s;">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shipping-fast" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-title">Pelayanan Cepat & Responsif</h3>
+                            <p>Admin kami siap merespon pesanan Anda melalui WhatsApp dengan cepat, ramah, dan memastikan paket Anda sampai dengan aman.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <section id="featured-products" class="section" style="background-color: var(--white);" aria-labelledby="featured-products-title">
-            <div class="container">
-                <h2 id="featured-products-title" class="section-title fade-in">Koleksi Unggulan Kami</h2>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.1s;">
-                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Kemeja Batik Parang Modern, harga Rp 350.000">
-                            <img src="https://images.unsplash.com/photo-1581044777550-4cfa6ce670c0?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Kemeja Batik dengan motif Parang modern, berwarna biru dan putih." loading="lazy">
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <h3 class="card-title">Kemeja Batik "Parang Modern"</h3>
-                                <p class="product-price">Rp 350.000</p>
-                                <a href="detail.html?id=P001" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Kemeja Batik Parang Modern">
-                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.2s;">
-                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Blouse Tenun Sumba Elegan, harga Rp 425.000">
-                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Blouse Tenun berwarna coklat dan krem, dengan motif etnik khas Sumba." loading="lazy">
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <h3 class="card-title">Blouse Tenun "Sumba Elegan"</h3>
-                                <p class="product-price">Rp 425.000</p>
-                                <a href="detail.html?id=P002" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Blouse Tenun Sumba Elegan">
-                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
-                                </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.3s;">
-                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Outer Kimono Nusa Dua, harga Rp 299.000">
-                            <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?q=80&w=1972&auto=format&fit=crop" class="card-img-top" alt="Outer Kimono berwarna hijau sage, dengan potongan longgar." loading="lazy">
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <h3 class="card-title">Outer Kimono "Nusa Dua"</h3>
-                                <p class="product-price">Rp 299.000</p>
-                                <a href="detail.html?id=P003" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Outer Kimono Nusa Dua">
-                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
-                                </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 fade-in" style="--delay: 0.4s;">
-                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Celana Kulot Senja, harga Rp 275.000">
-                            <img src="https://images.unsplash.com/photo-1551803091-e25622d22262?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Celana Kulot berwarna krem atau nude, cocok untuk gaya kasual." loading="lazy">
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <h3 class="card-title">Celana Kulot "Senja"</h3>
-                                <p class="product-price">Rp 275.000</p>
-                                <a href="detail.html?id=P004" class="btn btn-maroon btn-sm mt-auto btn-detail-with-icon" role="button" aria-label="Lihat detail Celana Kulot Senja">
-                                    Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
-                                </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="social-icons mb-3" role="list" aria-label="Ikuti kami di media sosial">
+                <a href="#" aria-label="Instagram Local Look" role="listitem"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook Local Look" role="listitem"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="TikTok Local Look" role="listitem"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="WhatsApp Local Look" role="listitem"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Local Look. All rights reserved.</p>
+        </div>
+    </footer>
 
-        <section id="why-us" class="section" aria-labelledby="why-us-title">
-            <div class="container">
-                <h2 id="why-us-title" class="section-title fade-in">Kenapa Memilih Kami?</h2>
-                <div class="row g-4">
-                    <div class="col-md-4 fade-in" style="--delay: 0.1s;">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-gem" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="feature-title">Kualitas Terbaik</h3>
-                            <p>Kami menggunakan bahan-bahan premium dan dikerjakan oleh pengrajin berpengalaman untuk memastikan setiap produk nyaman dipakai dan tahan lama.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 fade-in" style="--delay: 0.2s;">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-palette" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="feature-title">Desain Eksklusif</h3>
-                            <p>Setiap koleksi dirancang secara unik dengan memadukan tren modern dan sentuhan budaya nusantara yang tidak akan Anda temukan di tempat lain.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 fade-in" style="--delay: 0.3s;">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-shipping-fast" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="feature-title">Pelayanan Cepat & Responsif</h3>
-                            <p>Admin kami siap merespon pesanan Anda melalui WhatsApp dengan cepat, ramah, dan memastikan paket Anda sampai dengan aman.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="social-icons mb-3" role="list" aria-label="Ikuti kami di media sosial">
-                <a href="#" aria-label="Instagram Local Look" role="listitem"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Facebook Local Look" role="listitem"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="TikTok Local Look" role="listitem"><i class="fab fa-tiktok"></i></a>
-                <a href="#" aria-label="WhatsApp Local Look" role="listitem"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p>&copy; 2025 Local Look. All rights reserved.</p>
-        </div>
-    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // --- Cart Badge Update (Realistis dari LocalStorage) ---
+            function updateCartBadge() {
+                const cartBadge = document.getElementById('cart-badge');
+                // Mengambil data keranjang dari LocalStorage
+                const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+                // Menghitung total jumlah item di keranjang
+                const totalQty = keranjang.reduce((acc, item) => acc + parseInt(item.jumlah || 0), 0);
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                if (totalQty > 0) {
+                    cartBadge.textContent = totalQty;
+                    cartBadge.classList.remove('d-none');
+                } else {
+                    cartBadge.classList.add('d-none');
+                }
+            }
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // --- Cart Badge Update (Realistis dari LocalStorage) ---
-            function updateCartBadge() {
-                const cartBadge = document.getElementById('cart-badge');
-                // Mengambil data keranjang dari LocalStorage
-                const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
-                // Menghitung total jumlah item di keranjang
-                const totalQty = keranjang.reduce((acc, item) => acc + parseInt(item.jumlah || 0), 0);
-
-                if (totalQty > 0) {
-                    cartBadge.textContent = totalQty;
-                    cartBadge.classList.remove('d-none');
-                } else {
-                    cartBadge.classList.add('d-none');
-                }
-            }
-
-            // Call on page load
-            updateCartBadge();
+            // Call on page load
+            updateCartBadge();
 
 
-            // --- Scroll Animation (Intersection Observer) ---
-            const observerOptions = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1
-            };
+            // --- Scroll Animation (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const delay = entry.target.style.getPropertyValue('--delay');
-                        if (delay) {
-                            entry.target.style.transitionDelay = delay;
-                        }
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Stop observing after it becomes visible
-                    }
-                });
-            }, observerOptions);
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.style.getPropertyValue('--delay');
+                        if (delay) {
+                            entry.target.style.transitionDelay = delay;
+                        }
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing after it becomes visible
+                    }
+                });
+            }, observerOptions);
 
-            // Find all elements with the fade-in class and start observing
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
+            // Find all elements with the fade-in class and start observing
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 
 </body>
 </html>
