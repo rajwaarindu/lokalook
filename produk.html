@@ -1,995 +1,546 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Produk - Lokalook</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk - Local Look</title>
+
+    <meta name="description" content="Jelajahi semua koleksi fashion Local Look. Temukan kemeja batik, blouse tenun, outer kimono, dan celana kulot dengan sentuhan budaya Nusantara. " />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
-        /* :root pseudo-class to define global CSS Custom Properties */
+        /* --- Variabel Warna & Font --- */
         :root {
-            /* Light Theme (Default) - Teal & Gold Palette */
-           --maroon: #800000;
-      --nude: #f5e9e2;
-      --black: #1a1a1a;
-      --white: #ffffff;
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Montserrat', sans-serif;
-    }
-
-            /* Shared Variables */
-            --header-padding: 1rem 2rem;
-            --logo-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            --font-primary: 'Poppins', sans-serif;
-            --font-size-logo: 1.8rem;
-            --font-weight-logo: bold;
-            --font-weight-nav: 600;
-            --logo-gap: 0.75rem;
-            --nav-gap: 1.75rem;
-            --nav-link-padding: 0.4rem 0;
-            --transition-duration: 0.3s;
-            --transition-timing-function: ease-in-out; /* Changed for smoother animations */
-            --border-radius-main: 12px;
-            --border-radius-small: 8px;
-            --border-radius-micro: 3px;
-            --z-index-sticky-header: 1000;
-            --max-width-main: 1100px;
+            --maroon: #800000;
+            --maroon-dark: #550000;
+            --nude: #f5e9e2;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
         }
 
-        /* Dark Theme Variables - Teal & Gold Palette */
-        body.dark-mode {
-            --bg-color: #212121; /* Dark grey */
-            --text-color: #e0e0e0;
-            --card-bg-color: #333333;
-            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            --card-hover-shadow: 0 12px 30px rgba(23, 162, 184, 0.35); /* Dark mode teal hover shadow, stronger */
-            --header-bg-start: #004d55; /* Darker teal for dark mode header */
-            --header-bg-end: #00606f;    /* Teal for dark mode header */
-            --header-bg-solid: #00606f;
-            --header-text-color: #f0f0f0;
-            --secondary-text-color: #aaaaaa;
-            --footer-bg-color: #1a1a1a;
-            --input-bg-color: #444444;
-            --input-border-color: #666666;
-            --border-light: #555555;
-            --loading-spinner-color: var(--accent-color);
-        }
-
-        /* General Styling */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
+        /* --- Reset dan Body --- */
         body {
-            font-family: var(--font-primary);
+            background-color: var(--nude);
+            color: var(--black);
+            font-family: var(--font-body);
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color var(--transition-duration) var(--transition-timing-function),
-                        color var(--transition-duration) var(--transition-timing-function);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6; /* Improved readability */
         }
 
-        /* Visually Hidden Utility */
-        .visually-hidden {
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--nude); /* Changed: Navbar background is now Nude */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-family: var(--font-heading);
+            font-size: 1.85rem; /* Adjusted size slightly */
+            font-weight: 700;
+            color: var(--maroon); /* Changed: Brand color is now Maroon */
+            text-decoration: none;
+        }
+        .navbar-brand img {
+            /* Adjusted for better visibility on nude background.
+               If your logo is already dark and visible, remove this filter. */
+            filter: brightness(0.8) saturate(1.2);
+        }
+        .nav-link {
+            color: var(--maroon); /* Changed: Nav links color is now Maroon */
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-size: 1.05rem; /* Slightly larger nav links */
+        }
+        .nav-link.active,
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--maroon-dark); /* Changed: Hover/active color is now Maroon Dark */
+            text-decoration: none;
+        }
+        .cart-badge {
             position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        /* --- Header --- */
-        header {
-            background: linear-gradient(90deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
-            color: var(--header-text-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: var(--header-padding);
-            position: sticky;
             top: 0;
-            z-index: var(--z-index-sticky-header);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            backdrop-filter: saturate(180%) blur(10px);
-            -webkit-backdrop-filter: saturate(180%) blur(10px);
-        }
-
-        .logo {
-            font-size: var(--font-size-logo);
-            font-weight: var(--font-weight-logo);
-            display: flex;
-            align-items: center;
-            gap: var(--logo-gap);
-            cursor: pointer;
-            text-shadow: var(--logo-text-shadow);
-            color: var(--header-text-color);
-            text-decoration: none;
-        }
-        .logo img {
-            height: 60px;
-            width: auto;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: var(--nav-gap);
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--header-text-color);
-            font-weight: var(--font-weight-nav);
-            padding: var(--nav-link-padding);
-            position: relative;
-            transition: color var(--transition-duration) var(--transition-timing-function),
-                        transform var(--transition-duration) var(--transition-timing-function);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0%;
-            height: 2.5px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: width var(--transition-duration) var(--transition-timing-function);
-            border-radius: var(--border-radius-micro);
-        }
-
-        nav a:hover,
-        nav a.active,
-        nav a:focus-visible {
-            color: var(--accent-color);
-            transform: translateY(-2px);
-            outline: none;
-        }
-        nav a:hover::after,
-        nav a.active::after,
-        nav a:focus-visible::after {
-            width: 100%;
-        }
-
-        .nav-tools {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .cart-link {
-            position: relative;
-            color: var(--header-text-color);
-            text-decoration: none;
-            transition: color var(--transition-duration) var(--transition-timing-function);
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-        .cart-link:hover {
-            color: var(--accent-color);
-        }
-        .cart-count {
-            position: absolute;
-            top: -8px;
             right: -10px;
-            background-color: var(--accent-color);
-            color: white;
+            font-size: 0.75rem;
+            background-color: var(--maroon); /* Changed: Cart badge background is now Maroon */
+            color: var(--white); /* Changed: Cart badge text is now White */
             border-radius: 50%;
-            padding: 0.1em 0.4em;
-            font-size: 0.7rem;
-            font-weight: bold;
-            line-height: 1;
-            min-width: 1.2em;
-            text-align: center;
-            opacity: 0; /* Initially hidden */
-            transform: scale(0.5); /* Initially smaller */
-            transition: opacity var(--transition-duration) var(--transition-timing-function),
-                        transform var(--transition-duration) var(--transition-timing-function);
-        }
-        .cart-count.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--header-text-color);
-            font-size: 1.3rem;
-            cursor: pointer;
-            padding: 0.25rem;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
-            transition: color var(--transition-duration) var(--transition-timing-function);
-        }
-        .theme-toggle:hover, .theme-toggle:focus-visible {
-            color: var(--accent-color);
-            outline: none;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--header-text-color);
-            cursor: pointer;
-            padding: 0.25rem;
-            transition: transform var(--transition-duration) var(--transition-timing-function);
-        }
-        .menu-toggle:active {
-            transform: scale(0.9);
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 0.8rem 1rem;
-            }
-            nav {
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                background: var(--header-bg-solid);
-                position: absolute;
-                top: 100%;
-                right: 0;
-                padding: 1rem;
-                width: 220px;
-                box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
-                border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-10px);
-                transition: opacity var(--transition-duration) var(--transition-timing-function),
-                            visibility var(--transition-duration) var(--transition-timing-function),
-                            transform var(--transition-duration) var(--transition-timing-function);
-            }
-
-            nav.show {
-                display: flex;
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-            }
-            nav a {
-                width: 100%;
-                padding: 0.75rem 0.5rem;
-            }
-            nav a::after {
-                bottom: 0.25rem;
-            }
-            .nav-tools {
-                width: 100%;
-                justify-content: space-between;
-                padding: 0.5rem 0.5rem 0;
-                border-top: 1px solid var(--border-light);
-                margin-top: 0.5rem;
-            }
-            .theme-toggle {
-                font-size: 1.5rem;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        main {
-            max-width: var(--max-width-main);
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .page-title {
-            text-align: center;
-            color: var(--accent-color-darker);
-            margin-bottom: 2.5rem;
-            font-size: 2rem;
-            font-weight: 700; /* Slightly bolder */
-        }
-
-        .filters-and-search {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            align-items: center;
-        }
-
-        .search-container {
-            width: 100%;
-            max-width: 400px;
-        }
-        #search-input {
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--input-border-color);
-            border-radius: var(--border-radius-small);
-            width: 100%;
-            font-size: 1rem;
-            background-color: var(--input-bg-color);
-            color: var(--text-color);
-            transition: border-color var(--transition-duration) var(--transition-timing-function),
-                        box-shadow var(--transition-duration) var(--transition-timing-function);
-        }
-        #search-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.2);
-        }
-
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
             justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 0 4px rgba(0,0,0,0.2);
         }
-        .filter-btn {
-            background-color: var(--card-bg-color);
-            border: 1px solid var(--input-border-color);
-            border-radius: var(--border-radius-small);
-            padding: 0.6rem 1.2rem;
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: var(--text-color);
-            transition: background-color var(--transition-duration) var(--transition-timing-function),
-                        color var(--transition-duration) var(--transition-timing-function),
-                        border-color var(--transition-duration) var(--transition-timing-function),
-                        transform var(--transition-duration) var(--transition-timing-function);
+        .navbar-toggler {
+            border: none;
+            background-color: transparent;
         }
-        .filter-btn:hover, .filter-btn:focus-visible {
-            border-color: var(--accent-color);
+        .navbar-toggler-icon {
+            /* Changed: Standard Bootstrap dark toggler icon for light background */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(128, 0, 0)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        .navbar-toggler:focus {
             outline: none;
-            transform: translateY(-3px); /* Increased translateY for more pop */
-        }
-        .filter-btn.active {
-            background-color: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3); /* Add shadow to active button */
+            box-shadow: 0 0 0 3px var(--maroon);
+            border-radius: 4px;
         }
 
-        .order-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            min-height: 200px;
-            position: relative;
+        /* --- Tombol --- */
+        .btn-maroon {
+            background-color: var(--maroon);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
+        }
+        .btn-maroon:hover,
+        .btn-maroon:focus {
+            background-color: var(--maroon-dark);
+            color: var(--white);
+            text-decoration: none;
+            outline: none;
+            box-shadow: 0 3px 8px rgba(85, 0, 0, 0.7);
+        }
+        /* New style for button with icon */
+        .btn-with-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center; /* Center content if button is wider */
+            gap: 8px; /* Space between text and icon */
+        }
+        .btn-with-icon i {
+            font-size: 1rem; /* Adjust icon size */
+        }
+        .btn-outline-maroon {
+            border: 1px solid var(--maroon);
+            color: var(--maroon);
+            background-color: transparent;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        .btn-outline-maroon:hover,
+        .btn-outline-maroon:focus {
+            background-color: var(--maroon);
+            color: var(--white);
+            text-decoration: none;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
         }
 
-        .order-item {
-            background: var(--card-bg-color);
-            border-radius: var(--border-radius-main);
+
+        /* --- General Section Styling --- */
+        .section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--maroon);
+            user-select: none;
+        }
+
+        /* --- Product Card --- */
+        .product-card {
+            border: none;
+            border-radius: 12px;
+            background-color: var(--white);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: transform var(--transition-duration) var(--transition-timing-function),
-                        box-shadow var(--transition-duration) var(--transition-timing-function);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            opacity: 0; /* For fade-in animation */
-            transform: translateY(20px); /* For slight slide-up */
-            animation: fadeInSlideUp 0.5s forwards var(--transition-timing-function);
         }
-        @keyframes fadeInSlideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
-
-        .order-item:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--card-hover-shadow);
-        }
-
-        .order-item .img-link {
-            display: block;
-            border-bottom: 4px solid var(--accent-color);
-        }
-        .order-item img {
-            width: 100%;
-            height: 220px;
+        .product-card img {
             object-fit: cover;
-            display: block;
-            transition: transform 0.4s var(--transition-timing-function);
+            max-height: 280px;
+            width: 100%;
+            transition: transform 0.3s ease;
+            user-select: none;
         }
-        .order-item:hover img {
-            transform: scale(1.05); /* Zoom effect on image hover */
+        .product-card:hover img {
+            transform: scale(1.05);
         }
-
-        .order-info {
+        .product-card .card-body {
             padding: 1.25rem;
+            text-align: center;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
-
-        .order-info h4 {
-            margin: 0 0 0.5rem;
-            font-size: 1.25rem;
-            color: var(--text-color);
-        }
-        .order-info .product-name-link {
-            text-decoration: none;
-            color: inherit;
-            transition: color var(--transition-duration) var(--transition-timing-function);
-        }
-        .order-info .product-name-link:hover {
-            color: var(--accent-color);
-        }
-
-        .price {
-            color: var(--accent-color-darker);
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            justify-content: center;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: var(--input-bg-color);
-            border: 1px solid var(--input-border-color);
-            border-radius: var(--border-radius-small);
-            padding: 0.25rem 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .quantity-control button {
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            cursor: pointer;
-            padding: 0 0.5rem;
-            color: var(--text-color);
-            transition: color var(--transition-duration) var(--transition-timing-function),
-                        transform var(--transition-duration) var(--transition-timing-function);
-        }
-        .quantity-control button:hover {
-            color: var(--accent-color-darker);
-            transform: translateY(-1px);
-        }
-        .quantity-control input[type="number"] {
-            width: 50px;
-            text-align: center;
-            border: none;
-            background: transparent;
-            color: var(--text-color);
-            font-size: 1rem;
-            padding: 0;
-            -moz-appearance: textfield;
-            /* Remove blue highlight on iOS */
-            -webkit-tap-highlight-color: transparent;
-        }
-        .quantity-control input::-webkit-outer-spin-button,
-        .quantity-control input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .quantity-control button:hover,
-        .quantity-control button:focus-visible {
-            color: var(--accent-color);
-            outline: none;
-            transform: scale(1.1); /* Pop effect on quantity buttons */
-        }
-
-        .quantity-control span {
-            font-size: 1rem;
-            min-width: 24px;
-            text-align: center;
-            color: var(--text-color);
-        }
-
-        .btn-tambah {
-            background-color: var(--accent-color);
-            border: none;
-            color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: var(--border-radius-small);
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
+        .product-card .card-title {
+            font-family: var(--font-body);
             font-weight: 600;
-            margin-top: auto;
-            transition: background-color var(--transition-duration) var(--transition-timing-function),
-                        transform var(--transition-duration) var(--transition-timing-function),
-                        box-shadow var(--transition-duration) var(--transition-timing-function);
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: var(--black);
+            user-select: none;
+        }
+        .product-price {
+            color: var(--maroon);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            user-select: none;
+        }
+
+        /* --- Filter Bar --- */
+        .filter-bar {
+            margin-bottom: 3rem;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-end;
         }
-
-        .btn-tambah:hover, .btn-tambah:focus-visible {
-            background-color: var(--accent-color-darker);
-            outline: none;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.4); /* Add shadow to add to cart button */
-        }
-
-        #no-produk {
-            text-align: center;
-            width: 100%;
-            padding: 2rem;
-            font-size: 1.2rem;
-            color: var(--secondary-text-color);
-            display: none; /* Controlled by JS */
-            opacity: 0; /* For fade-in animation */
-            transition: opacity 0.5s var(--transition-timing-function);
-        }
-        #no-produk.show {
-            opacity: 1;
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            border: 4px solid var(--border-light);
-            border-top: 4px solid var(--loading-spinner-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.3s ease-out;
-        }
-        .loading-spinner.show {
-            opacity: 1;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Toast Notification */
-        .toast-notification {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: var(--border-radius-small);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .toast-notification.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-10px);
-        }
-
-        /* Back to Top Button */
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
+        .filter-bar .form-select {
+            border-radius: 0.5rem;
+            border: 1px solid var(--maroon);
+            color: var(--maroon);
+            background-color: var(--white);
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            width: auto;
+            min-width: 180px;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: background-color var(--transition-duration) var(--transition-timing-function),
-                        transform var(--transition-duration) var(--transition-timing-function);
-            z-index: 900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-        #back-to-top:hover {
-            background-color: var(--accent-color-darker);
-            transform: translateY(-5px) scale(1.05); /* More pronounced hover */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .filter-bar .form-select:focus {
+            border-color: var(--maroon-dark);
+            box-shadow: 0 0 0 0.25rem rgba(128, 0, 0, 0.25);
+            outline: none;
         }
-        #back-to-top:active {
-            transform: translateY(-2px) scale(0.95);
+        @media (min-width: 768px) {
+            .filter-bar .col-md-3 {
+                flex: 0 0 auto;
+                width: 25%;
+            }
+        }
+        @media (max-width: 767px) {
+            .filter-bar {
+                justify-content: center;
+            }
+            .filter-bar .col-md-3 {
+                width: 100%;
+            }
         }
 
-        footer {
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--black);
+            padding: 3rem 1rem;
+            color: var(--white);
             text-align: center;
-            padding: 1.5rem 1rem;
-            background: var(--footer-bg-color);
-            color: var(--secondary-text-color);
-            margin-top: 4rem;
-            font-size: 0.9rem;
-            transition: background-color var(--transition-duration) var(--transition-timing-function),
-                        color var(--transition-duration) var(--transition-timing-function);
+            user-select: none;
+        }
+        .footer .social-icons a {
+            color: var(--white);
+            font-size: 1.75rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .footer .social-icons a:hover,
+        .footer .social-icons a:focus {
+            color: var(--maroon);
+            text-decoration: none;
+            outline: none;
+        }
+
+        /* --- Animasi On-Scroll --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <header>
-          <a href="index.html" class="logo" aria-label="Lokalook Homepage">
-            <img src="lokalook-logo.png" alt="" style="height: 100px;" />
-        </a> 
-        <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" onclick="toggleMenu()">
-            <i class="bi bi-list"></i>
-        </button>
-        <nav id="nav-menu">
-            <a href="index.html">Beranda</a>
-            <a href="produk.html" class="active">Produk</a>
-            <div class="nav-tools">
-                <a href="keranjang.html" class="cart-link" aria-label="Keranjang Belanja">
-                    <i class="bi bi-cart"></i> Keranjang
-                    <span id="cart-count" class="cart-count">0</span>
-                </a>
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
-                    <i class="bi bi-moon-stars-fill"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <h2 class="page-title">Koleksi Produk Lokal Terbaik</h2>
-
-        <div class="filters-and-search">
-            <div class="search-container">
-                <label for="search-input" class="visually-hidden">Cari produk:</label>
-                <input type="search" id="search-input" placeholder="Cari produk..." aria-label="Cari produk">
-            </div>
-
-            <div class="filters" id="category-filters">
-                <button class="filter-btn active" data-category="all">Semua Produk</button>
-                <button class="filter-btn" data-category="pakaian">Pakaian</button>
-                <button class="filter-btn" data-category="aksesoris">Aksesoris</button>
-                <button class="filter-btn" data-category="kerajinan">Kerajinan</button>
+    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                Local Look
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" role="menu">
+                    <li class="nav-item" role="none"><a class="nav-link" href="index.html" role="menuitem">Beranda</a></li>
+                    <li class="nav-item" role="none"><a class="nav-link active" href="produk.html" aria-current="page" role="menuitem">Produk</a></li>
+                    <li class="nav-item position-relative" role="none">
+                        <a class="nav-link" href="keranjang.html" role="menuitem" aria-label="Keranjang Belanja">
+                            Keranjang <span id="cart-badge" class="cart-badge d-none" aria-live="polite" aria-atomic="true">0</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <section class="order-container" id="produk-list" aria-live="polite" aria-atomic="true">
-            <div class="loading-spinner" id="loading-spinner" role="status" aria-label="Memuat produk..."></div>
-            <p id="no-produk">Produk tidak ditemukan.</p>
+    <main>
+        <section class="section" aria-labelledby="all-collection-title">
+            <div class="container">
+                <h1 id="all-collection-title" class="section-title fade-in" style="--delay: 0s;">Semua Koleksi Kami</h1>
+
+                <div class="filter-bar fade-in" style="--delay: 0.1s;">
+                    <div class="flex-grow-1 flex-md-grow-0 me-md-2">
+                        <label for="kategori-filter" class="visually-hidden">Filter Kategori</label>
+                        <select class="form-select" id="kategori-filter" aria-label="Filter Kategori Produk">
+                            <option selected>Semua Kategori</option>
+                            <option value="atasan">Atasan</option>
+                            <option value="bawahan">Bawahan</option>
+                            <option value="outer">Outer</option>
+                        </select>
+                    </div>
+                    <div class="flex-grow-1 flex-md-grow-0">
+                        <label for="sort-order" class="visually-hidden">Urutkan Berdasarkan</label>
+                        <select class="form-select" id="sort-order" aria-label="Urutkan Produk Berdasarkan">
+                            <option selected>Urutkan Berdasarkan</option>
+                            <option value="terbaru">Terbaru</option>
+                            <option value="harga-terendah">Harga Terendah</option>
+                            <option value="harga-tertinggi">Harga Tertinggi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4 fade-in" style="--delay: 0.2s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Kemeja Batik Parang Modern, harga Rp 350.000">
+                            <img src="https://images.unsplash.com/photo-1581044777550-4cfa6ce670c0?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Kemeja Batik dengan motif Parang modern, berwarna biru dan putih." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Kemeja Batik "Parang Modern"</h3>
+                                <p class="product-price">Rp 350.000</p>
+                                <div class="d-flex justify-content-center gap-2 mt-auto">
+                                    <a href="detail.html?id=P001" class="btn btn-outline-maroon btn-sm btn-with-icon" role="button" aria-label="Lihat detail Kemeja Batik Parang Modern">
+                                        Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-maroon btn-sm btn-with-icon" onclick="tambahKeKeranjang('P001', 'Kemeja Batik Parang Modern', 350000, 'https://images.unsplash.com/photo-1581044777550-4cfa6ce670c0?q=80&w=1974&auto=format&fit=crop')" aria-label="Tambah Kemeja Batik Parang Modern ke keranjang">
+                                        Tambah <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 fade-in" style="--delay: 0.3s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Blouse Tenun Sumba Elegan, harga Rp 425.000">
+                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Blouse Tenun berwarna coklat dan krem, dengan motif etnik khas Sumba." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Blouse Tenun "Sumba Elegan"</h3>
+                                <p class="product-price">Rp 425.000</p>
+                                <div class="d-flex justify-content-center gap-2 mt-auto">
+                                    <a href="detail.html?id=P002" class="btn btn-outline-maroon btn-sm btn-with-icon" role="button" aria-label="Lihat detail Blouse Tenun Sumba Elegan">
+                                        Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-maroon btn-sm btn-with-icon" onclick="tambahKeKeranjang('P002', 'Blouse Tenun Sumba Elegan', 425000, 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1974&auto=format&fit=crop')" aria-label="Tambah Blouse Tenun Sumba Elegan ke keranjang">
+                                        Tambah <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 fade-in" style="--delay: 0.4s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Outer Kimono Nusa Dua, harga Rp 299.000">
+                            <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?q=80&w=1972&auto=format&fit=crop" class="card-img-top" alt="Outer Kimono berwarna hijau sage, dengan potongan longgar." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Outer Kimono "Nusa Dua"</h3>
+                                <p class="product-price">Rp 299.000</p>
+                                <div class="d-flex justify-content-center gap-2 mt-auto">
+                                    <a href="detail.html?id=P003" class="btn btn-outline-maroon btn-sm btn-with-icon" role="button" aria-label="Lihat detail Outer Kimono Nusa Dua">
+                                        Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-maroon btn-sm btn-with-icon" onclick="tambahKeKeranjang('P003', 'Outer Kimono Nusa Dua', 299000, 'https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?q=80&w=1972&auto=format&fit=crop')" aria-label="Tambah Outer Kimono Nusa Dua ke keranjang">
+                                        Tambah <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 fade-in" style="--delay: 0.5s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Celana Kulot Senja, harga Rp 275.000">
+                            <img src="https://images.unsplash.com/photo-1551803091-e25622d22262?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Celana Kulot berwarna krem atau nude, cocok untuk gaya kasual." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Celana Kulot "Senja"</h3>
+                                <p class="product-price">Rp 275.000</p>
+                                <div class="d-flex justify-content-center gap-2 mt-auto">
+                                    <a href="detail.html?id=P004" class="btn btn-outline-maroon btn-sm btn-with-icon" role="button" aria-label="Lihat detail Celana Kulot Senja">
+                                        Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-maroon btn-sm btn-with-icon" onclick="tambahKeKeranjang('P004', 'Celana Kulot Senja', 275000, 'https://images.unsplash.com/photo-1551803091-e25622d22262?q=80&w=1974&auto=format&fit=crop')" aria-label="Tambah Celana Kulot Senja ke keranjang">
+                                        Tambah <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 fade-in" style="--delay: 0.6s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Tunik Lurik Klasik, harga Rp 380.000">
+                            <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Tunik dengan motif lurik klasik berwarna coklat gelap dan garis-garis tipis." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Tunik Lurik "Klasik"</h3>
+                                <p class="product-price">Rp 380.000</p>
+                                <div class="d-flex justify-content-center gap-2 mt-auto">
+                                    <a href="detail.html?id=P005" class="btn btn-outline-maroon btn-sm btn-with-icon" role="button" aria-label="Lihat detail Tunik Lurik Klasik">
+                                        Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-maroon btn-sm btn-with-icon" onclick="tambahKeKeranjang('P005', 'Tunik Lurik Klasik', 380000, 'https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=1974&auto=format&fit=crop')" aria-label="Tambah Tunik Lurik Klasik ke keranjang">
+                                        Tambah <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 fade-in" style="--delay: 0.7s;">
+                        <div class="card product-card h-100" tabindex="0" role="article" aria-label="Dress Pantai Flores, harga Rp 450.000">
+                            <img src="https://images.unsplash.com/photo-1525455246237-6e2ab308babd?q=80&w=1974&auto=format&fit=crop" class="card-img-top" alt="Dress pantai ringan dengan motif floral cerah, cocok untuk liburan di Flores." loading="lazy">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h3 class="card-title">Dress Pantai "Flores"</h3>
+                                <p class="product-price">Rp 450.000</p>
+                                <div class="d-flex justify-content-center gap-2 mt-auto">
+                                    <a href="detail.html?id=P006" class="btn btn-outline-maroon btn-sm btn-with-icon" role="button" aria-label="Lihat detail Dress Pantai Flores">
+                                        Lihat Detail <i class="fas fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-maroon btn-sm btn-with-icon" onclick="tambahKeKeranjang('P006', 'Dress Pantai Flores', 450000, 'https://images.unsplash.com/photo-1525455246237-6e2ab308babd?q=80&w=1974&auto=format&fit=crop')" aria-label="Tambah Dress Pantai Flores ke keranjang">
+                                        Tambah <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <button id="back-to-top" aria-label="Gulir ke atas halaman">
-        <i class="bi bi-arrow-up"></i>
-    </button>
-
-    <div id="toast-notification" class="toast-notification" aria-live="polite" aria-atomic="true" style="display: none;">
-        <i class="bi bi-check-circle-fill"></i> <span id="toast-message"></span>
-    </div>
-
-    <footer>
-        <p>&copy; <span id="current-year"></span> Lokalook. Hak cipta dilindungi.</p>
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="social-icons mb-3" role="list" aria-label="Ikuti kami di media sosial">
+                <a href="#" aria-label="Instagram Local Look" role="listitem"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook Local Look" role="listitem"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="TikTok Local Look" role="listitem"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="WhatsApp Local Look" role="listitem"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Local Look. All rights reserved.</p>
+        </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // Simulate product data with categories
-        const produkData = [
-            { id: 'P001', nama: 'Baju Wanita', harga: 120000, gambar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJoO_Q3E6PQbeVP-QifekzowpUBQGKtq5vSMyhTSh9dhH2Yph3NQoqmPbeTT_cjmzExUg&usqp=CAU', category: 'pakaian' },
-            { id: 'P002', nama: 'Kemeja Batik Wanita', harga: 125000, gambar: 'https://cdn1-production-images-kly.akamaized.net/Yy7PeJEYzVVBNQYCdawQndcYwM0=/500x500/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/5184952/original/034407900_1744353483-1c9747d99ebbbead42a182bd975fc130.jpg', category: 'pakaian' },
-            { id: 'P003', nama: 'Hoodie Nyaman Banget', harga: 145000, gambar: 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/6/1/2810e5bb-8466-4d4b-8e4f-200d20a42762.jpg', category: 'pakaian' },
-            { id: 'P004', nama: 'Celana Chino Kasual', harga: 110000, gambar: 'https://via.placeholder.com/300x220.png?text=Celana+Chino', category: 'pakaian' },
-            { id: 'A001', nama: 'Gelang Tali Etnik', harga: 35000, gambar: 'https://via.placeholder.com/300x220.png?text=Gelang+Etnik', category: 'aksesoris' },
-            { id: 'A002', nama: 'Topi Distro Lokal', harga: 60000, gambar: 'https://via.placeholder.com/300x220.png?text=Topi+Distro', category: 'aksesoris' },
-            { id: 'K001', nama: 'Kerajinan Tangan Anyaman', harga: 80000, gambar: 'https://via.placeholder.com/300x220.png?text=Anyaman+Cantik', category: 'kerajinan' },
-            { id: 'K002', nama: 'Pajangan Meja Kayu', harga: 95000, gambar: 'https://via.placeholder.com/300x220.png?text=Pajangan+Kayu', category: 'kerajinan' },
-        ];
+        document.addEventListener("DOMContentLoaded", function() {
+            // --- Scroll Animation (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
 
-        const produkListEl = document.getElementById('produk-list');
-        const searchInput = document.getElementById('search-input');
-        const noProdukEl = document.getElementById('no-produk');
-        const cartCountEl = document.getElementById('cart-count');
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const currentYearEl = document.getElementById('current-year');
-        const categoryFiltersEl = document.getElementById('category-filters');
-        const loadingSpinnerEl = document.getElementById('loading-spinner');
-        const backToTopBtn = document.getElementById('back-to-top');
-        const navMenu = document.getElementById('nav-menu');
-        const toastNotification = document.getElementById('toast-notification');
-        const toastMessage = document.getElementById('toast-message');
-
-        let currentCategory = 'all'; // Default filter category
-        let searchTimeout; // For debouncing search input
-
-        /**
-         * Displays the loading spinner and clears product list/no product message.
-         */
-        function showLoadingSpinner() {
-            produkListEl.innerHTML = '';
-            noProdukEl.classList.remove('show');
-            noProdukEl.style.display = 'none'; // Ensure display is none before transition
-            loadingSpinnerEl.style.display = 'block'; // Make sure it's visible before adding class
-            setTimeout(() => loadingSpinnerEl.classList.add('show'), 10); // Add class for fade-in animation
-        }
-
-        /**
-         * Hides the loading spinner.
-         */
-        function hideLoadingSpinner() {
-            loadingSpinnerEl.classList.remove('show');
-            // Allow time for fade-out before setting display to none
-            setTimeout(() => {
-                loadingSpinnerEl.style.display = 'none';
-            }, 300);
-        }
-
-        /**
-         * Renders the product items into the DOM.
-         * @param {Array} itemsToRender - An array of product objects to render.
-         */
-        function renderProduk(itemsToRender = produkData) {
-            showLoadingSpinner();
-
-            // Simulate network delay
-            setTimeout(() => {
-                produkListEl.innerHTML = ''; // Clear existing products
-                if (itemsToRender.length === 0) {
-                    noProdukEl.style.display = 'block'; // Make sure it's visible before adding class
-                    setTimeout(() => noProdukEl.classList.add('show'), 10); // Add class for fade-in
-                } else {
-                    noProdukEl.classList.remove('show');
-                    noProdukEl.style.display = 'none';
-                    itemsToRender.forEach((p, index) => {
-                        const article = document.createElement('article');
-                        article.className = 'order-item';
-                        // Add a slight delay for each item for a staggered animation effect
-                        article.style.animationDelay = `${index * 0.05}s`;
-                        article.innerHTML = `
-                            <a href="detail.html?id=${p.id}" class="img-link">
-                                <img src="${p.gambar}" alt="${p.nama}" loading="lazy" />
-                            </a>
-                            <div class="order-info">
-                                <a href="detail.html?id=${p.id}" class="product-name-link">
-                                    <h4>${p.nama}</h4>
-                                </a>
-                                <p class="price">Rp ${p.harga.toLocaleString('id-ID')}</p>
-                                <div class="quantity-control">
-                                    <button type="button" onclick="changeQuantity(this, -1)" aria-label="Kurangi jumlah"><i class="bi bi-dash-circle"></i></button>
-                                    <input type="number" value="1" min="1" max="99" onchange="validateQuantity(this)" aria-label="Jumlah produk">
-                                    <button type="button" onclick="changeQuantity(this, 1)" aria-label="Tambah jumlah"><i class="bi bi-plus-circle"></i></button>
-                                </div>
-                                <button type="button" class="btn-tambah" onclick="tambahKeranjang('${p.id}', this)" aria-label="Tambah ${p.nama} ke keranjang">
-                                    <i class="bi bi-cart-plus-fill"></i> Tambah
-                                </button>
-                            </div>
-                        `;
-                        produkListEl.appendChild(article);
-                    });
-                }
-                hideLoadingSpinner();
-            }, 500); // Simulate 0.5 second loading time
-        }
-
-        /**
-         * Changes the quantity of a product in the quantity control.
-         * @param {HTMLButtonElement} button - The button element (+ or -) that was clicked.
-         * @param {number} delta - The amount to change the quantity by (1 or -1).
-         */
-        function changeQuantity(button, delta) {
-            const input = button.parentNode.querySelector('input[type="number"]');
-            let quantity = parseInt(input.value) + delta;
-            if (quantity < 1) quantity = 1;
-            if (quantity > 99) quantity = 99; // Cap at 99
-            input.value = quantity;
-            // Trigger input change for accessibility or other listeners
-            input.dispatchEvent(new Event('change'));
-        }
-
-        /**
-         * Validates and corrects the quantity input value.
-         * @param {HTMLInputElement} input - The input element to validate.
-         */
-        function validateQuantity(input) {
-            let quantity = parseInt(input.value);
-            if (isNaN(quantity) || quantity < 1) quantity = 1;
-            if (quantity > 99) quantity = 99;
-            input.value = quantity;
-        }
-
-        /**
-         * Adds a product to the shopping cart in localStorage.
-         * Displays a toast notification upon successful addition.
-         * @param {string} produkId - The ID of the product to add.
-         * @param {HTMLButtonElement} buttonElement - The "Tambah" button element clicked.
-         */
-        function tambahKeranjang(produkId, buttonElement) {
-            const itemToAdd = produkData.find(p => p.id === produkId);
-            if (!itemToAdd) return;
-
-            const quantityInput = buttonElement.closest('.order-info').querySelector('.quantity-control input');
-            const quantity = parseInt(quantityInput.value);
-
-            let keranjang = JSON.parse(localStorage.getItem('keranjangLokalook')) || [];
-            const existingItemIndex = keranjang.findIndex(p => p.id === itemToAdd.id);
-
-            if (existingItemIndex > -1) {
-                keranjang[existingItemIndex].quantity = (keranjang[existingItemIndex].quantity || 0) + quantity;
-                showToastNotification(`${quantity} ${itemToAdd.nama} berhasil ditambahkan (jumlah diperbarui)!`);
-            } else {
-                keranjang.push({...itemToAdd, quantity: quantity });
-                showToastNotification(`${quantity} ${itemToAdd.nama} berhasil ditambahkan ke keranjang!`);
-            }
-            localStorage.setItem('keranjangLokalook', JSON.stringify(keranjang));
-            updateCartCount();
-        }
-
-        /**
-         * Shows a temporary toast notification.
-         * @param {string} message - The message to display in the toast.
-         */
-        function showToastNotification(message) {
-            toastMessage.textContent = message;
-            toastNotification.style.display = 'flex'; // Ensure display is flex for animation
-            setTimeout(() => toastNotification.classList.add('show'), 10);
-
-            // Hide after 3 seconds
-            setTimeout(() => {
-                toastNotification.classList.remove('show');
-                // Hide after transition ends
-                toastNotification.addEventListener('transitionend', function handler() {
-                    toastNotification.style.display = 'none';
-                    toastNotification.removeEventListener('transitionend', handler);
-                });
-            }, 3000);
-        }
-
-        /**
-         * Updates the shopping cart item count displayed in the header.
-         */
-        function updateCartCount() {
-            const keranjang = JSON.parse(localStorage.getItem('keranjangLokalook')) || [];
-            const totalItems = keranjang.reduce((sum, item) => sum + (item.quantity || 0), 0);
-            if (totalItems > 0) {
-                cartCountEl.textContent = totalItems;
-                cartCountEl.classList.add('show'); // Show with animation
-            } else {
-                cartCountEl.classList.remove('show'); // Hide with animation
-                // Ensure the element is completely hidden after the animation
-                setTimeout(() => {
-                    if (!cartCountEl.classList.contains('show')) {
-                        cartCountEl.style.display = 'none';
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.style.getPropertyValue('--delay');
+                        if (delay) {
+                            entry.target.style.transitionDelay = delay;
+                        }
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing after it becomes visible
                     }
-                }, 300);
-            }
-        }
-
-        /**
-         * Toggles the visibility of the mobile navigation menu.
-         */
-        function toggleMenu() {
-            navMenu.classList.toggle('show');
-            const isExpanded = navMenu.classList.contains('show');
-            document.querySelector('.menu-toggle').setAttribute('aria-expanded', isExpanded);
-        }
-
-        /**
-         * Applies the current category filter and search term to the product list.
-         * Debounces the search input to prevent excessive re-rendering.
-         */
-        function applyFiltersAndSearch() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                let filteredProduk = produkData;
-
-                if (currentCategory !== 'all') {
-                    filteredProduk = filteredProduk.filter(p => p.category === currentCategory);
-                }
-
-                if (searchTerm) {
-                    filteredProduk = filteredProduk.filter(p =>
-                        p.nama.toLowerCase().includes(searchTerm)
-                    );
-                }
-                renderProduk(filteredProduk);
-            }, 300); // Debounce time of 300ms
-        }
-
-        /**
-         * Sets the initial theme (dark/light) based on localStorage or system preference.
-         */
-        function setInitialTheme() {
-            const savedTheme = localStorage.getItem('themeLokalook');
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const themeIcon = themeToggleBtn.querySelector('i');
-
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                document.body.classList.add('dark-mode');
-                themeIcon.className = 'bi bi-brightness-high-fill'; // Sun icon
-            } else {
-                document.body.classList.remove('dark-mode');
-                themeIcon.className = 'bi bi-moon-stars-fill'; // Moon icon
-            }
-        }
-
-        // Dark Mode Toggle Event Listener
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const themeIcon = themeToggleBtn.querySelector('i');
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('themeLokalook', 'dark');
-                themeIcon.className = 'bi bi-brightness-high-fill';
-            } else {
-                localStorage.setItem('themeLokalook', 'light');
-                themeIcon.className = 'bi bi-moon-stars-fill';
-            }
-        });
-
-        // Back to Top functionality
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.style.display = 'flex'; // Use flex to center icon
-                setTimeout(() => backToTopBtn.style.opacity = '1', 10);
-            } else {
-                backToTopBtn.style.opacity = '0';
-                setTimeout(() => backToTopBtn.style.display = 'none', 300); // Hide after fade out
-            }
-        });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Set current year in footer
-        currentYearEl.textContent = new Date().getFullYear();
-
-        // Event Listeners
-        searchInput.addEventListener('input', applyFiltersAndSearch);
-
-        categoryFiltersEl.addEventListener('click', (event) => {
-            const target = event.target;
-            if (target.classList.contains('filter-btn')) {
-                categoryFiltersEl.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
                 });
-                target.classList.add('active');
-                currentCategory = target.dataset.category;
-                applyFiltersAndSearch();
+            }, observerOptions);
+
+            // Find all elements with the fade-in class and start observing
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- Cart Badge Update ---
+            function updateCartBadge() {
+                const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+                const badge = document.getElementById('cart-badge');
+                // Menggunakan totalQty untuk badge, bukan hanya jumlah item unik
+                const totalQty = keranjang.reduce((acc, item) => acc + parseInt(item.jumlah || 0), 0);
+
+                if (totalQty > 0) {
+                    badge.textContent = totalQty;
+                    badge.classList.remove('d-none');
+                } else {
+                    badge.classList.add('d-none');
+                }
             }
+
+            // Call updateCartBadge on page load
+            updateCartBadge();
         });
 
-        // Initial Setup on DOMContentLoaded
-        document.addEventListener('DOMContentLoaded', () => {
-            setInitialTheme();
-            updateCartCount();
-            applyFiltersAndSearch(); // Initial render with filters
+        // --- Add to Cart Function ---
+        // Made global so it can be called directly from onclick attributes
+        function tambahKeKeranjang(id, nama, harga, gambar) {
+            let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
 
-            // Set active navigation link
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('#nav-menu a').forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
+            // Check if product already exists in cart
+            let produkAda = keranjang.find(p => p.id === id);
+
+            if (produkAda) {
+                // If it exists, increment the quantity
+                produkAda.jumlah++;
+            } else {
+                // If not, add as a new item
+                keranjang.push({ id, nama, harga, gambar, jumlah: 1 });
+            }
+
+            // Save back to localStorage
+            localStorage.setItem('keranjang', JSON.stringify(keranjang));
+
+            // Show notification to user (optional, can be replaced with a toast)
+            alert(`"${nama}" telah ditambahkan ke keranjang.`);
+
+            // Update cart badge notification
+            document.dispatchEvent(new Event('cartUpdated')); // Trigger event for cart badge
+        }
+
+        // Listen for the custom event to update the cart badge from anywhere
+        document.addEventListener('cartUpdated', function() {
+            const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+            const badge = document.getElementById('cart-badge');
+            const totalQty = keranjang.reduce((acc, item) => acc + parseInt(item.jumlah || 0), 0);
+
+            if (totalQty > 0) {
+                badge.textContent = totalQty;
+                badge.classList.remove('d-none');
+            } else {
+                badge.classList.add('d-none');
+            }
         });
     </script>
+
 </body>
 </html>
